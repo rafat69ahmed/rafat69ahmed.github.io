@@ -1,438 +1,1194 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John Doe | Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out forwards',
+            'fade-in-up': 'fadeInUp 0.5s ease-in-out forwards',
+            'fade-in-down': 'fadeInDown 0.5s ease-in-out forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeInDown: {
+              '0%': { opacity: '0', transform: 'translateY(-20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    
+    .animate-fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .animation-delay-200 {
+      animation-delay: 200ms;
+    }
+    
+    .animation-delay-400 {
+      animation-delay: 400ms;
+    }
+    
+    .animation-delay-600 {
+      animation-delay: 600ms;
+    }
+    
+    .animation-delay-800 {
+      animation-delay: 800ms;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <!-- Header -->
+  <header id="header" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="#" class="text-xl font-bold text-gray-900 dark:text-white">
+            Portfolio<span class="text-blue-500">.</span>
+          </a>
+        </div>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Rafat Ahmed</title>
-        <link rel="stylesheet" href="assets/css/tailwind.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    </head>
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300">Home</a>
+          <a href="#about" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300">About</a>
+          <a href="#projects" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300">Projects</a>
+          <a href="#skills" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300">Skills</a>
+          <a href="#contact" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300">Contact</a>
+          <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode">
+            <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+        </nav>
 
-    <body class="bg-gray-100">
-        
-        <section class="py-10 md:py-16">
+        <!-- Mobile Navigation Toggle -->
+        <div class="flex items-center md:hidden">
+          <button id="darkModeToggleMobile" class="p-2 mr-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode">
+            <svg id="moonIconMobile" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg id="sunIconMobile" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+          <button id="mobileMenuToggle" class="p-2 rounded-md text-gray-700 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700 transition-colors" aria-label="Toggle menu">
+            <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
 
-            <div class="container max-w-screen-xl mx-auto px-4">
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden bg-white dark:bg-gray-900 shadow-lg hidden">
+      <div class="container mx-auto px-4 py-4">
+        <nav class="flex flex-col space-y-4">
+          <a href="#home" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors py-2">Home</a>
+          <a href="#about" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors py-2">About</a>
+          <a href="#projects" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors py-2">Projects</a>
+          <a href="#skills" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors py-2">Skills</a>
+          <a href="#contact" class="text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors py-2">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-                <nav class="flex items-center justify-between mb-40">
-                    <a href="#">
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16 bg-gray-50 dark:bg-gray-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight animate-fade-in-up">
+              <span class="block">Hello, I'm</span>
+              <span class="text-blue-600 dark:text-blue-400">John Doe</span>
+            </h1>
+            <p class="mt-4 text-xl text-gray-600 dark:text-gray-400 max-w-lg animate-fade-in-up animation-delay-200">
+              Frontend Developer specializing in creating beautiful, functional, and user-friendly web experiences.
+            </p>
 
-                        <img src="assets/image/navbar-logo.png" alt="Logo">
+            <div class="mt-8 flex flex-wrap gap-4 animate-fade-in-up animation-delay-400">
+              <a href="#projects" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 flex items-center">
+                View My Work
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <a href="#contact" class="px-6 py-3 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-gray-800 font-medium rounded-lg transition-colors duration-300">
+                Contact Me
+              </a>
+            </div>
+
+            <div class="mt-8 flex items-center space-x-4 animate-fade-in-up animation-delay-600">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition-colors duration-300" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="p-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition-colors duration-300" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="p-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition-colors duration-300" aria-label="Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 flex justify-center md:justify-end animate-fade-in-up animation-delay-800">
+            <div class="relative">
+              <div class="w-64 h-64 sm:w-80 sm:h-80 bg-blue-500 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-xl">
+                <img src="https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="John Doe" class="w-full h-full object-cover">
+              </div>
+              <div class="absolute -bottom-6 -right-6 w-28 h-28 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg border-4 border-white dark:border-gray-800 shadow-lg">
+                <span>5+ Years<br>Experience</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white dark:bg-gray-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            About <span class="text-blue-600 dark:text-blue-400">Me</span>
+          </h2>
+          <div class="w-20 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4"></div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
+          <div class="md:w-2/5">
+            <div class="relative animate-on-scroll">
+              <div class="absolute inset-0 transform translate-x-4 translate-y-4 bg-blue-600 dark:bg-blue-500 rounded-lg"></div>
+              <img src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="About Me" class="relative z-10 rounded-lg shadow-lg object-cover w-full h-auto">
+            </div>
+          </div>
+
+          <div class="md:w-3/5">
+            <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white animate-on-scroll">
+              Frontend Developer & UI/UX Enthusiast
+            </h3>
+            
+            <p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed animate-on-scroll">
+              I'm a passionate frontend developer with 5+ years of experience creating responsive and user-friendly web applications. My journey in web development began during college, and since then, I've worked with various technologies and frameworks to deliver exceptional digital experiences.
+            </p>
+            <p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed animate-on-scroll">
+              I specialize in HTML, CSS, JavaScript, and modern frameworks like Tailwind. I'm dedicated to writing clean, maintainable code and creating intuitive user interfaces that provide real value to users.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+              <div class="flex items-start animate-on-scroll">
+                <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Education</h4>
+                  <p class="text-gray-700 dark:text-gray-300 mt-2">
+                    B.S. Computer Science<br>
+                    University of Technology
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start animate-on-scroll">
+                <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Experience</h4>
+                  <p class="text-gray-700 dark:text-gray-300 mt-2">
+                    Senior Frontend Developer<br>
+                    Tech Innovations Inc.
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start animate-on-scroll">
+                <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Certifications</h4>
+                  <p class="text-gray-700 dark:text-gray-300 mt-2">
+                    AWS Certified Developer<br>
+                    React Advanced Certification
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start animate-on-scroll">
+                <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Achievements</h4>
+                  <p class="text-gray-700 dark:text-gray-300 mt-2">
+                    Web Excellence Award 2024<br>
+                    Hackathon Winner 2023
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 animate-on-scroll">
+              <a href="#" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300">
+                Download Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            My <span class="text-blue-600 dark:text-blue-400">Projects</span>
+          </h2>
+          <div class="w-20 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4"></div>
+          <p class="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Here's a selection of my recent work. Each project represents different challenges and solutions.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-blue-600 text-white" data-filter="all">All</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors duration-300" data-filter="Web App">Web App</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors duration-300" data-filter="UI/UX">UI/UX</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors duration-300" data-filter="Full Stack">Full Stack</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors duration-300" data-filter="Mobile App">Mobile App</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02] animate-on-scroll" data-category="Web App,Frontend">
+            <div class="h-56 relative overflow-hidden">
+              <img src="https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="E-Commerce Platform" class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div>
+                  <div class="flex space-x-4 mb-4">
+                    <a href="https://example.com/demo1" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
                     </a>
-
-                    <a href="assets/documents/rafat_ahmed_cv.pdf" download="rafat_ahmed_cv.pdf">
-
-                        <button class="px-7 py-3 md:px-9 md:py-4 bg-white font-medium md:font-semibold text-gray-700 text-md rounded-md hover:bg-gray-700 hover:text-white transition ease-linear duration-500">Get my CV</button>
+                    <a href="https://github.com/example/project1" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
                     </a>
-                </nav>
-
-                <div class="text-center">
-                    <div class="flex justify-center mb-16">
-                        <img src="assets/image/undraw_programming_re_kg9v.svg" alt="Image" class="w-52 h-auto">
-                    </div>
-
-                    <h6 class="font-medium text-gray-600 text-lg md:text-2xl uppercase mb-8">Rafat Ahmed</h6>
-
-                    <h1 class="font-normal text-gray-900 text-4xl md:text-7xl leading-none mb-8">Senior Software Engineer</h1>
-
-                    <p class="font-normal text-gray-600 text-md md:text-xl mb-16">I have a passion for software. I enjoy creating tools that make life easier for people.</p>
-
-                    <a href="#" class="px-7 py-3 md:px-9 md:py-4 font-medium md:font-semibold bg-gray-700 text-gray-50 text-sm rounded-md hover:bg-gray-50 hover:text-gray-700 transition ease-linear duration-500">Reach me</a>
+                  </div>
                 </div>
-
-            </div>
-
-        </section>
-
-        <section class="py-10 md:py-16">
-
-            <div class="container max-w-screen-xl mx-auto px-4">
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <div class="w-20 py-6 flex justify-center bg-gray-100 rounded-md mb-4">
-                            <i data-feather="activity"></i>
-                        </div>
-
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">Backend</h4>
-
-                        <p class="font-normal text-gray-500 text-md">
-                            Architect robust systems with precision and care
-                            Craft APIs that bridge applications everywhere
-                            Refine performance through efficient design
-                            Empowering innovation, one backend at a time.
-                        </p>
-                    </div>
-                    
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <div class="w-20 py-6 flex justify-center bg-gray-100 rounded-md mb-4">
-                            <i data-feather="codesandbox"></i>
-                        </div>
-
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">Database</h4>
-
-                        <p class="font-normal text-gray-500 text-md">
-                            Design data structures for clarity and scale. 
-                            Optimize queries to never let performance fail. 
-                            Ensure integrity with each schema aligned. 
-                            Powering systems with a database well-defined.
-                        </p>
-                    </div>
-                    
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <div class="w-20 py-6 flex justify-center bg-gray-100 rounded-md mb-4">
-                            <i data-feather="coffee"></i>
-                        </div>
-
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">DevOps</h4>
-
-                        <p class="font-normal text-gray-500 text-md">
-                            Automate workflows to streamline every task. 
-                            Build resilient systems that always surpass. 
-                            Monitor, deploy, and ensure uptime divine. 
-                            Bridging teams with pipelines robust and fine.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <section class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-            <div class="max-w-2xl">
-              <h2 class="text-4xl font-medium text-gray-900 mb-4">Portfolio</h2>
-              <p class="text-lg text-gray-600 mb-16">
-                I have brought here my biggest and favorite works as a professional.
-              </p>
-            </div>
-          
-            <div class="space-y-24">
-              <div class="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
-                <div class="flex items-center gap-4 md:w-1/3">
-                  <span class="text-4xl font-light text-gray-900">01</span>
-                  <span class="w-28 h-0.5 bg-gray-300 mt-5"></span>
-                  <div class="h-[1px] w-24 bg-gray-300 mt-2"></div>
-                  <h3 class="text-2xl font-medium text-gray-900">Leid</h3>
-                </div>
-                <p class="text-gray-600 md:w-2/3">
-                    Technologies:  nodejs, express, postgres, Kitemaker, AWS, python, react, nextjs, typescript, lambda
-                    Developed microservice-based web applications for rental service using node js and for client using nextjs. 
-                    Instead of buying, people can borrow tools. After placing an order the user will get a QR code. They are using that he/she can take the ordered tools for a time.
-                    
-                </p>
-              </div>
-          
-              <div class="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
-                <div class="flex items-center gap-4 md:w-1/3">
-                  <span class="text-4xl font-light text-gray-900">02</span>
-                  <span class="w-28 h-0.5 bg-gray-300 mt-5"></span>
-                  <div class="h-[1px] w-24 bg-gray-300 mt-2"></div>
-                  <h3 class="text-2xl font-medium text-gray-900">Friflyt</h3>
-                </div>
-                <p class="text-gray-600 md:w-2/3">
-                    Technologies:  nodejs, express, Kitemaker, react, nextjs, typescript, mysql, lambda, php, laravel, elastic search
-                    Developing subscription system using PHP, Laravel, node, and Express that is already in use in several sites
-                    . In the subscription system, we can provide monthly and yearly subscriptions based on the requirements.
-                    using node js we serve the data for the from elastic search also in aws lambda we used node js for storing data to elastic search
-                    
-                </p>
-              </div>
-          
-              <div class="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
-                <div class="flex items-center gap-4 md:w-1/3">
-                  <span class="text-4xl font-light text-gray-900">03</span>
-                  <span class="w-28 h-0.5 bg-gray-300 mt-5"></span>
-                  <div class="h-[1px] w-24 bg-gray-300 mt-2"></div>
-                  <h3 class="text-2xl font-medium text-gray-900">Vendidit</h3>
-                </div>
-                <p class="text-gray-600 md:w-2/3">
-                    Technologies:  Nodejs, NestJS, postgres, AWS, react, NextJs, typescript, lambda
-                    Developing web applications for auction services using Node.js (NestJS) and for clients using React and Next.js, with PostgreSQL for the database. Our system supports a multi-vendor seller system where sellers have full control over their auctions, customers, and products.
-                    Buyers can add auction products to their wishlist and follow sellers for future interactions. Registered buyers get notified immediately when a seller makes an auction live using SendGrid for email services.
-                    Real-time updates on auctions are provided, making the service popular among sellers and buyers. For queuing services, we use SQS; for notifications, we use SNS; and for deployment, we use ECS with AWS Load Balancer for scalability.
-                    A convenient online auction service that scales the traditional auction process, providing real-time updates and notifications to enhance user engagement.
-                    We recently started unit testing and achieved 53% code coverage using Jest. We also monitor and log using CloudWatch to ensure system stability and quick issue resolution.
-                    Visit us at vendidit.com to explore how our platform revolutionizes online auctions with live bidding, multi-vendor support, and real-time notifications.
-                    
-                </p>
               </div>
             </div>
-          </section>
-          
-          
-        
-        
-        <!-- education -->
-        <!-- <section class="py-10 md:py-16">
-
-            <div class="container max-w-screen-xl mx-auto px-4">
-
-                <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5">Education</h1>
-
-                <p class="font-normal text-gray-500 text-xs md:text-base mb-20">Below is a summary of the places I studied</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">2015 – 2016</h4>
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <div class="relative">
-                            <h6 class="font-semibold text-gray-500 text-md relative z-10">See the place here</h6>
-                            <span class="w-32 h-1 bg-blue-200 absolute bottom-1 left-0 z-0"></span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">2015 – 2016</h4>
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <div class="relative">
-                            <h6 class="font-semibold text-gray-500 text-md relative z-10">See the place here</h6>
-                            <span class="w-32 h-1 bg-blue-200 absolute bottom-1 left-0 z-0"></span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">2015 – 2016</h4>
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <div class="relative">
-                            <h6 class="font-semibold text-gray-500 text-md relative z-10">See the place here</h6>
-                            <span class="w-32 h-1 bg-blue-200 absolute bottom-1 left-0 z-0"></span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">2015 – 2016</h4>
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <div class="relative">
-                            <h6 class="font-semibold text-gray-500 text-md relative z-10">See the place here</h6>
-                            <span class="w-32 h-1 bg-blue-200 absolute bottom-1 left-0 z-0"></span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">2015 – 2016</h4>
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <div class="relative">
-                            <h6 class="font-semibold text-gray-500 text-md relative z-10">See the place here</h6>
-                            <span class="w-32 h-1 bg-blue-200 absolute bottom-1 left-0 z-0"></span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-                        <h4 class="font-medium text-gray-700 text-lg mb-4">2015 – 2016</h4>
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <div class="relative">
-                            <h6 class="font-semibold text-gray-500 text-md relative z-10">See the place here</h6>
-                            <span class="w-32 h-1 bg-blue-200 absolute bottom-1 left-0 z-0"></span>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">E-Commerce Platform</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">A full-featured e-commerce platform with product filtering, cart management, and checkout functionality.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">HTML</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">CSS</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">JavaScript</span>
+              </div>
             </div>
+          </div>
 
-        </section> -->
-
-        <!-- <section class="py-10 md:py-16">
-
-            <div class="container max-w-screen-xl mx-auto px-4">
-
-                <div class="text-center">
-                    <h1 class="font-normal text-gray-300 text-3xl md:text-6xl lg:text-7xl mb-20 md:mb-32 lg:mb-48">Please do not measure your skills in <br> percentages!</h1>
-
-                    <p class="font-medium text-gray-700 text-xs md:text-base">In my many years of experience, I use @laravel for backend projects and @vuejs for <br> front-end projects. I’m an avid programmer, so I create designs based on the <br> weekend @figmadesign.</p>
+          <!-- Project 2 -->
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02] animate-on-scroll" data-category="Web App,Full Stack">
+            <div class="h-56 relative overflow-hidden">
+              <img src="https://images.pexels.com/photos/7675413/pexels-photo-7675413.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fitness Tracker" class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div>
+                  <div class="flex space-x-4 mb-4">
+                    <a href="https://example.com/demo2" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                    <a href="https://github.com/example/project2" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
-
+              </div>
             </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Fitness Tracker</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">An application to track workouts, set fitness goals, and visualize progress over time.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">HTML</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">CSS</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">JavaScript</span>
+              </div>
+            </div>
+          </div>
 
-        </section> -->
+          <!-- Project 3 -->
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02] animate-on-scroll" data-category="UI/UX,Mobile App">
+            <div class="h-56 relative overflow-hidden">
+              <img src="https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Recipe App" class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div>
+                  <div class="flex space-x-4 mb-4">
+                    <a href="https://example.com/demo3" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                    <a href="https://github.com/example/project3" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Recipe App</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">A recipe discovery application with search functionality, favorites, and meal planning features.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">HTML</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">CSS</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">JavaScript</span>
+              </div>
+            </div>
+          </div>
 
-        <section class="py-10 md:py-16">
+          <!-- Project 4 -->
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02] animate-on-scroll" data-category="Web App,API Integration">
+            <div class="h-56 relative overflow-hidden">
+              <img src="https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Weather Dashboard" class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div>
+                  <div class="flex space-x-4 mb-4">
+                    <a href="https://example.com/demo4" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                    <a href="https://github.com/example/project4" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Weather Dashboard</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">Real-time weather forecast dashboard with location search and interactive maps.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">HTML</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">CSS</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">JavaScript</span>
+              </div>
+            </div>
+          </div>
 
-            <div class="container max-w-screen-xl mx-auto px-4">
+          <!-- Project 5 -->
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02] animate-on-scroll" data-category="Web App,Full Stack">
+            <div class="h-56 relative overflow-hidden">
+              <img src="https://images.pexels.com/photos/6956353/pexels-photo-6956353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Task Management Tool" class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div>
+                  <div class="flex space-x-4 mb-4">
+                    <a href="https://example.com/demo5" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                    <a href="https://github.com/example/project5" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Task Management Tool</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">A project management tool with task boards, assignees, and deadline tracking.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">HTML</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">CSS</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">JavaScript</span>
+              </div>
+            </div>
+          </div>
 
-                <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5">Experience</h1>
+          <!-- Project 6 -->
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02] animate-on-scroll" data-category="Web App,UI/UX">
+            <div class="h-56 relative overflow-hidden">
+              <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Portfolio Template" class="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div>
+                  <div class="flex space-x-4 mb-4">
+                    <a href="https://example.com/demo6" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                    <a href="https://github.com/example/project6" target="_blank" rel="noopener noreferrer" class="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Portfolio Template</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">A customizable portfolio template for developers and designers to showcase their work.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">HTML</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">CSS</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs rounded-full">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                <p class="font-normal text-gray-500 text-xs md:text-base mb-20">Below is a summary of the places I studied</p>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white dark:bg-gray-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            My <span class="text-blue-600 dark:text-blue-400">Skills</span>
+          </h2>
+          <div class="w-20 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4"></div>
+          <p class="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            These are the technologies and skills I've been working with throughout my career.
+          </p>
+        </div>
 
-                <div class="flex flex-col lg:flex-row justify-between">
-                    <div class="space-y-8 md:space-y-16 mb-16 md:mb-0">
-                        <h6 class="font-medium text-gray-400 text-base uppercase">Company</h6>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Skill 1 -->
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-on-scroll">
+            <div class="flex items-center mb-4">
+              <div class="mr-4 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">HTML & CSS</h3>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+              <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+            </div>
+            <div class="mt-2 flex justify-end">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">90%</span>
+            </div>
+          </div>
 
-                        <p class="font-semibold text-gray-600 text-base">Vendidit <span class="font-normal text-gray-500">/ USA(remote)</span></p>
+          <!-- Skill 2 -->
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-on-scroll">
+            <div class="flex items-center mb-4">
+              <div class="mr-4 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">JavaScript</h3>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+              <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+            </div>
+            <div class="mt-2 flex justify-end">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">85%</span>
+            </div>
+          </div>
 
-                        <p class="font-semibold text-gray-600 text-base">Cefalo <span class="font-normal text-gray-500">/ Bangladesh(hybrid)</span></p>
+          <!-- Skill 3 -->
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-on-scroll">
+            <div class="flex items-center mb-4">
+              <div class="mr-4 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">Tailwind CSS</h3>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+              <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+            </div>
+            <div class="mt-2 flex justify-end">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">92%</span>
+            </div>
+          </div>
 
-                        <p class="font-semibold text-gray-600 text-base">Thrive Edtech <span class="font-normal text-gray-500">/ Bangladesh(hybrid)</span></p>
-                    </div>
+          <!-- Skill 4 -->
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-on-scroll">
+            <div class="flex items-center mb-4">
+              <div class="mr-4 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">Responsive Design</h3>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+              <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+            </div>
+            <div class="mt-2 flex justify-end">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">90%</span>
+            </div>
+          </div>
 
-                    <div class="space-y-8 md:space-y-16 mb-16 md:mb-0">
-                        <h6 class="font-medium text-gray-400 text-base uppercase">Position</h6>
+          <!-- Skill 5 -->
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-on-scroll">
+            <div class="flex items-center mb-4">
+              <div class="mr-4 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                  <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                  <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                  <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                  <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                  <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">UI/UX Design</h3>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+              <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+            </div>
+            <div class="mt-2 flex justify-end">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">82%</span>
+            </div>
+          </div>
 
-                        <p class="font-normal text-gray-400 text-base">Senior Software Engineer</p>
+          <!-- Skill 6 -->
+          <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-on-scroll">
+            <div class="flex items-center mb-4">
+              <div class="mr-4 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">Web Performance</h3>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+              <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+            </div>
+            <div class="mt-2 flex justify-end">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">88%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                        <p class="font-normal text-gray-400 text-base">Senior Software Engineer</p>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            Get In <span class="text-blue-600 dark:text-blue-400">Touch</span>
+          </h2>
+          <div class="w-20 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4"></div>
+          <p class="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Have a project in mind or want to discuss potential opportunities? Feel free to contact me!
+          </p>
+        </div>
 
-                        <p class="font-normal text-gray-400 text-base">Senior Software Engineer</p>
-                    </div>
-
-                    <div class="space-y-8 md:space-y-16">
-                        <h6 class="font-medium text-gray-500 text-base uppercase">Year</h6>
-
-                        <p class="font-normal text-gray-500 text-base">2024</p>
-
-                        <p class="font-normal text-gray-500 text-base">2021</p>
-
-                        <p class="font-normal text-gray-500 text-base">2020</p>
-                    </div>
+        <div class="flex flex-col lg:flex-row gap-12">
+          <div class="lg:w-1/3">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md h-full animate-on-scroll">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Contact Information
+              </h3>
+              
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-medium text-gray-900 dark:text-white">Email</h4>
+                    <a href="mailto:hello@example.com" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      hello@example.com
+                    </a>
+                  </div>
                 </div>
                 
-            </div>
-
-        </section>
-
-        <!-- <section class="py-10 md:py-16">
-
-            <div class="container max-w-screen-xl mx-auto px-4">
-
-                <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5">Brands</h1>
-
-                <p class="font-normal text-gray-500 text-xs md:text-base mb-10 md:mb-20">Below is a summary of the places I studied</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <img src="assets/image/brand-1.png" alt="Image">
-
-                    <img src="assets/image/brand-2.png" alt="Image">
-
-                    <img src="assets/image/brand-3.png" alt="Image">
-
-                    <img src="assets/image/brand-4.png" alt="Image">
-
-                    <img src="assets/image/brand-5.png" alt="Image">
-
-                    <img src="assets/image/brand-6.png" alt="Image">
+                <div class="flex items-start">
+                  <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-medium text-gray-900 dark:text-white">Phone</h4>
+                    <a href="tel:+1234567890" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      +1 (234) 567-890
+                    </a>
+                  </div>
                 </div>
-
-            </div>
-
-        </section> -->
-
-        <!-- <section class="py-10 md:py-16">
-
-            <div class="container max-w-screen-xl mx-auto px-4">
-
-                <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5">Testimonial</h1>
-
-                <p class="font-normal text-gray-500 text-xs md:text-base mb-10 md:mb-20">Below is a summary of the places I studied</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <h6 class="font-semibold text-gray-500 text-md">Stephan Clark <span class="font-medium text-gray-300 text-sm">- CEO at EarlyBird</span></h6>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <h6 class="font-semibold text-gray-500 text-md">Stephan Clark <span class="font-medium text-gray-300 text-sm">- CEO at EarlyBird</span></h6>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <h6 class="font-semibold text-gray-500 text-md">Stephan Clark <span class="font-medium text-gray-300 text-sm">- CEO at EarlyBird</span></h6>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <h6 class="font-semibold text-gray-500 text-md">Stephan Clark <span class="font-medium text-gray-300 text-sm">- CEO at EarlyBird</span></h6>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <h6 class="font-semibold text-gray-500 text-md">Stephan Clark <span class="font-medium text-gray-300 text-sm">- CEO at EarlyBird</span></h6>
-                    </div>
-
-                    <div class="bg-gray-50 px-8 py-10 rounded-md">
-
-                        <p class="font-normal text-gray-500 text-md mb-4">Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua.</p>
-
-                        <h6 class="font-semibold text-gray-500 text-md">Stephan Clark <span class="font-medium text-gray-300 text-sm">- CEO at EarlyBird</span></h6>
-                    </div>
+                
+                <div class="flex items-start">
+                  <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-medium text-gray-900 dark:text-white">Location</h4>
+                    <p class="text-gray-600 dark:text-gray-400">
+                      San Francisco, CA
+                    </p>
+                  </div>
                 </div>
-
-            </div>
-
-        </section> -->
-
-        <footer class="py-10 md:py-16 mb-20 md:mb-40 lg::mb-52">
-
-            <div class="container max-w-screen-xl mx-auto px-4">
-
-                <div class="text-center">
-                    <h1 class="font-medium text-gray-700 text-4xl md:text-5xl mb-5">Contacts</h1>
-
-                    <p class="font-normal text-gray-400 text-md md:text-lg mb-20">Quality is my priority, feel free to contact me for any <br> other inquiries.</p>
-
-                    <div class="flex items-center justify-center space-x-8">
-                        <a href="https://github.com/rafat69ahmed" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="github" class="text-gray-500 hover:text-gray-800 transition ease-in-out duration-500"></i>
-                        </a>
-    
-                        <!-- <a href="#" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="dribbble" class="text-gray-500 hover:text-gray-700 transition ease-in-out duration-500"></i>
-                        </a> -->
-    
-                        <a href="https://www.facebook.com/rafat.ahmed.146" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="facebook" class="text-gray-500 hover:text-gray-700 transition ease-in-out duration-500"></i>
-                        </a>
-    
-                        <!-- <a href="#" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="codepen" class="text-gray-500 hover:text-gray-700 transition ease-in-out duration-500"></i>
-                        </a> -->
-    
-                        <!-- <a href="#" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="at-sign" class="text-gray-500 hover:text-gray-700 transition ease-in-out duration-500"></i>
-                        </a> -->
-    
-                        <a href="https://www.linkedin.com/in/rafat69ahmed" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="linkedin" class="text-gray-500 hover:text-gray-700 transition ease-in-out duration-500"></i>
-                        </a>
-                    </div>
+              </div>
+              
+              <div class="mt-10">
+                <h4 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Follow Me</h4>
+                <div class="flex space-x-4">
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                  </a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="p-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="p-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                    </svg>
+                  </a>
                 </div>
-
+              </div>
             </div>
+          </div>
 
-        </footer>
+          <div class="lg:w-2/3">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md animate-on-scroll">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Send Me a Message
+              </h3>
+              
+              <div id="formSuccess" class="mb-6 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg hidden">
+                Your message has been sent successfully! I'll get back to you soon.
+              </div>
+              
+              <form id="contactForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Your Name
+                    </label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white focus:ring-2 transition-colors outline-none">
+                    <p id="nameError" class="mt-1 text-sm text-red-500 hidden">Name is required</p>
+                  </div>
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Your Email
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white focus:ring-2 transition-colors outline-none">
+                    <p id="emailError" class="mt-1 text-sm text-red-500 hidden">Email is required</p>
+                  </div>
+                </div>
+                
+                <div class="mb-6">
+                  <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Subject
+                  </label>
+                  <input type="text" id="subject" name="subject" placeholder="Project Inquiry" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white focus:ring-2 transition-colors outline-none">
+                  <p id="subjectError" class="mt-1 text-sm text-red-500 hidden">Subject is required</p>
+                </div>
+                
+                <div class="mb-6">
+                  <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Message
+                  </label>
+                  <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or inquiry..." class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white focus:ring-2 transition-colors outline-none"></textarea>
+                  <p id="messageError" class="mt-1 text-sm text-red-500 hidden">Message is required</p>
+                </div>
+                
+                <button id="submitBtn" type="submit" class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center justify-center hover:bg-blue-700">
+                  <span id="buttonText">Send Message</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                  <svg id="loadingSpinner" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-8 md:mb-0">
+          <h3 class="text-2xl font-bold">
+            Portfolio<span class="text-blue-500">.</span>
+          </h3>
+          <p class="mt-2 text-gray-400 max-w-md">
+            Creating beautiful, functional, and user-friendly web experiences.
+          </p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#home" class="text-gray-400 hover:text-blue-400 transition-colors">Home</a>
+              </li>
+              <li>
+                <a href="#about" class="text-gray-400 hover:text-blue-400 transition-colors">About</a>
+              </li>
+              <li>
+                <a href="#projects" class="text-gray-400 hover:text-blue-400 transition-colors">Projects</a>
+              </li>
+              <li>
+                <a href="#skills" class="text-gray-400 hover:text-blue-400 transition-colors">Skills</a>
+              </li>
+              <li>
+                <a href="#contact" class="text-gray-400 hover:text-blue-400 transition-colors">Contact</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Contact</h4>
+            <ul class="space-y-2">
+              <li class="text-gray-400">
+                <a href="mailto:hello@example.com" class="hover:text-blue-400 transition-colors">
+                  hello@example.com
+                </a>
+              </li>
+              <li class="text-gray-400">
+                <a href="tel:+1234567890" class="hover:text-blue-400 transition-colors">
+                  +1 (234) 567-890
+                </a>
+              </li>
+              <li class="text-gray-400">
+                San Francisco, CA
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Social</h4>
+            <div class="flex space-x-4">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <script>
-            feather.replace()
-        </script>
+      <hr class="my-8 border-gray-800">
+      
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 text-sm">
+          &copy; <span id="currentYear"></span> Portfolio. All rights reserved.
+        </p>
+        
+        <button id="scrollToTop" class="mt-4 md:mt-0 p-3 bg-blue-600 hover:bg-blue-700 rounded-full transition-colors" aria-label="Scroll to top">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </footer>
 
-    </body>
+  <!-- JavaScript -->
+  <script>
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Handle mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
+    const moonIcon = document.getElementById('moonIcon');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIconMobile = document.getElementById('moonIconMobile');
+    const sunIconMobile = document.getElementById('sunIconMobile');
+    const html = document.documentElement;
+
+    // Check for saved theme preference or use system preference
+    if (localStorage.getItem('darkMode') === 'true' || 
+        (localStorage.getItem('darkMode') === null && 
+         window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+      moonIcon.classList.add('hidden');
+      sunIcon.classList.remove('hidden');
+      moonIconMobile.classList.add('hidden');
+      sunIconMobile.classList.remove('hidden');
+    }
+
+    function toggleDarkMode() {
+      html.classList.toggle('dark');
+      moonIcon.classList.toggle('hidden');
+      sunIcon.classList.toggle('hidden');
+      moonIconMobile.classList.toggle('hidden');
+      sunIconMobile.classList.toggle('hidden');
+      
+      // Save preference
+      localStorage.setItem('darkMode', html.classList.contains('dark'));
+    }
+
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+    darkModeToggleMobile.addEventListener('click', toggleDarkMode);
+
+    // Scroll to top button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Header background on scroll
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        header.classList.add('bg-white/90', 'dark:bg-gray-900/90', 'shadow-md', 'backdrop-blur-sm');
+        header.classList.remove('bg-transparent');
+      } else {
+        header.classList.remove('bg-white/90', 'dark:bg-gray-900/90', 'shadow-md', 'backdrop-blur-sm');
+        header.classList.add('bg-transparent');
+      }
+    });
+
+    // Animate elements on scroll
+    const animateElements = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      
+      elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight - 100;
+        
+        if (isVisible) {
+          element.classList.add('animate-fade-in');
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', animateElements);
+    window.addEventListener('load', animateElements);
+
+    // Project filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+        filterBtns.forEach(b => b.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300', 'dark:bg-gray-700', 'dark:text-gray-300', 'dark:hover:bg-gray-600'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active', 'bg-blue-600', 'text-white');
+        btn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300', 'dark:bg-gray-700', 'dark:text-gray-300', 'dark:hover:bg-gray-600');
+        
+        const filter = btn.getAttribute('data-filter');
+        
+        projectCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 50);
+          } else {
+            const categories = card.getAttribute('data-category').split(',');
+            
+            if (categories.includes(filter)) {
+              card.style.display = 'block';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 50);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.8)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          }
+        });
+      });
+    });
+
+    // Skills animation
+    const skillBars = document.querySelectorAll('.bg-gray-50.dark\\:bg-gray-700 .bg-gradient-to-r');
+    
+    const animateSkillBars = () => {
+      skillBars.forEach((bar, index) => {
+        const parentElement = bar.parentElement.parentElement;
+        const percentElement = parentElement.querySelector('.text-sm');
+        const percent = percentElement.textContent.replace('%', '');
+        
+        setTimeout(() => {
+          bar.style.width = `${percent}%`;
+        }, index * 100);
+      });
+    };
+    
+    // Contact form validation
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const buttonText = document.getElementById('buttonText');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Reset errors
+      document.querySelectorAll('#contactForm p[id$="Error"]').forEach(el => el.classList.add('hidden'));
+      
+      // Get form values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      // Validate
+      let isValid = true;
+      
+      if (!name) {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      if (!email) {
+        document.getElementById('emailError').classList.remove('hidden');
+        document.getElementById('emailError').textContent = 'Email is required';
+        isValid = false;
+      } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('emailError').classList.remove('hidden');
+        document.getElementById('emailError').textContent = 'Email is invalid';
+        isValid = false;
+      }
+      
+      if (!subject) {
+        document.getElementById('subjectError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      if (!message) {
+        document.getElementById('messageError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        // Show loading state
+        submitBtn.disabled = true;
+        loadingSpinner.classList.remove('hidden');
+        buttonText.textContent = 'Sending...';
+        
+        // Simulate form submission (would be replaced with actual API call)
+        setTimeout(() => {
+          // Reset form
+          contactForm.reset();
+          
+          // Hide loading state
+          submitBtn.disabled = false;
+          loadingSpinner.classList.add('hidden');
+          buttonText.textContent = 'Send Message';
+          
+          // Show success message
+          formSuccess.classList.remove('hidden');
+          
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            formSuccess.classList.add('hidden');
+          }, 5000);
+        }, 1500);
+      }
+    });
+
+    // Initialize skill bars animation when section is visible
+    const skillsSection = document.getElementById('skills');
+    
+    const checkSkillsVisibility = () => {
+      const rect = skillsSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100 && rect.bottom >= 0) {
+        animateSkillBars();
+        window.removeEventListener('scroll', checkSkillsVisibility);
+      }
+    };
+    
+    window.addEventListener('scroll', checkSkillsVisibility);
+    window.addEventListener('load', checkSkillsVisibility);
+  </script>
+</body>
 </html>
