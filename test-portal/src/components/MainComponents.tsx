@@ -9,6 +9,7 @@ import { Vehicles } from "./Vehicles";
 import { Billing } from "./Billing";
 import { AddEditUser } from "./AddEditUser";
 import { ChangeEmail } from "./ChangeEmail";
+import { Profile } from "./Profile";
 import { B2CStepUpProtectedRoute } from "./StepUpProtectedRoute";
 
 export function MainComponents() {
@@ -20,6 +21,7 @@ export function MainComponents() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/vehicles" element={<Vehicles />} />
+            <Route path="/profile" element={<Profile />} />
 
             {/* Wildcard parent — sub-routes are inside Billing.tsx via TabbedRouting */}
             <Route path="/billing/*" element={<Billing />} />
