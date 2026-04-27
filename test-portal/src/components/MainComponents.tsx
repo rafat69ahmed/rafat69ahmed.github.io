@@ -10,10 +10,11 @@ import { Billing } from "./Billing";
 import { AddEditUser } from "./AddEditUser";
 import { ChangeEmail } from "./ChangeEmail";
 import { Profile } from "./Profile";
+import { Notifications } from "./Notifications";
 import { B2CStepUpProtectedRoute } from "./StepUpProtectedRoute";
 
 export function MainComponents() {
-    const { canChangeOwnEmail } = useFlags();
+    const { canChangeOwnEmail, enableNotifications } = useFlags();
 
     return (
         <Routes>
@@ -39,6 +40,12 @@ export function MainComponents() {
             {/* Flag-gated: only rendered when the canChangeOwnEmail LaunchDarkly flag is on */}
             {canChangeOwnEmail && (
                 <Route path="/changeEmail" element={<ChangeEmail />} />
+            )}
+
+            {/* Another flag-gated route — the pipeline should pick up
+                `enableNotifications` as a `requires_flags` entry on this URI. */}
+            {enableNotifications && (
+                <Route path="/notifications" element={<Notifications />} />
             )}
         </Routes>
     );
