@@ -2,9 +2,9 @@
 // the React Router JSX extractor handles. Not built or served — the pipeline
 // reads this file with ts-morph, never executes it.
 //
-// (touched to trigger a real-LLM + real-upload run. Expected outcome:
-// rafat-test.json in UC volume now contains LLM-generated prose instead
-// of MOCK PROSE placeholders.)
+// (touched to verify the env var rename: pipeline now reads LLM_API_KEY /
+// LLM_MODEL from secrets — OPENAI_* names removed. Expected outcome:
+// successful run + fresh registry in UC volume.)
 
 import { Routes, Route } from "react-router-dom";
 import { useFlags } from "launchdarkly-react-client-sdk";
