@@ -1,0 +1,13 @@
+{
+  "name": "rafat-test-portal",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Fixture portal for worthy-ai-wayfinding-pipeline. Not built or served.",
+  "type": "module",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0",
+    "launchdarkly-react-client-sdk": "^3.0.0"
+  }
+}
