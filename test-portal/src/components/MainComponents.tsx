@@ -2,9 +2,9 @@
 // the React Router JSX extractor handles. Not built or served — the pipeline
 // reads this file with ts-morph, never executes it.
 //
-// (touched to trigger a real-upload run on rafat69ahmed/worthy-ai-wayfinding-pipeline
-// — first run with --dry-run removed. Expected outcome: rafat-test.json lands
-// at /Volumes/sandbox/worthy_ai/wayfinding/.)
+// (touched to trigger a real-LLM + real-upload run. Expected outcome:
+// rafat-test.json in UC volume now contains LLM-generated prose instead
+// of MOCK PROSE placeholders.)
 
 import { Routes, Route } from "react-router-dom";
 import { useFlags } from "launchdarkly-react-client-sdk";
