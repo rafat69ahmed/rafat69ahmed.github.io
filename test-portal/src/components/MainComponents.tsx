@@ -2,9 +2,9 @@
 // the React Router JSX extractor handles. Not built or served — the pipeline
 // reads this file with ts-morph, never executes it.
 //
-// (touched to retry the run after fixing keyword sanitization. Previous
-// run failed when LLM emitted `B2C` as a keyword — schema rejected
-// uppercase. Sanitizer now lowercases + filters before assembly.)
+// (touched to verify the production-shape changes: WAYFINDING_VOLUME_PATH
+// now drives the upload destination, OPENAI_* fallback removed, RECONCILED
+// state for hand-authored entries.)
 
 import { Routes, Route } from "react-router-dom";
 import { useFlags } from "launchdarkly-react-client-sdk";
