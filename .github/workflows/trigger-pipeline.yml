@@ -1,0 +1,59 @@
+name: trigger-wayfinding-pipeline
+
+# STRICTLY dev-branch only. A push to main NEVER triggers the pipeline —
+# main is the live portfolio site and stays out of the wayfinding loop.
+#
+# When a push hits dev, this workflow POSTs a `repository_dispatch` event
+# to bestpass/worthy-ai-wayfinding-pipeline. That repo's
+# .github/workflows/run-on-dispatch.yml takes it from there.
+
+on:
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repository_dispatch to wayfinding pipeline
+        env:
+          PIPELINE_DISPATCH_TOKEN: ${{ secrets.PIPELINE_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$PIPELINE_DISPATCH_TOKEN" ]; then
+            echo "::error::PIPELINE_DISPATCH_TOKEN secret is not set on this repo. See trigger-pipeline.yml header for setup instructions." >&2
+            exit 1
+          fi
+
+          response=$(curl --silent --show-error --output /tmp/resp.txt --write-out '%{http_code}' \
+            -X POST \
+            -H "Authorization: Bearer $PIPELINE_DISPATCH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/bestpass/worthy-ai-wayfinding-pipeline/dispatches \
+            -d "$(cat <<JSON
+          {
+            "event_type": "portal-push",
+            "client_payload": {
+              "portal": "rafat-test",
+              "repo":   "${{ github.repository }}",
+              "ref":    "${{ github.ref_name }}",
+              "sha":    "${{ github.sha }}",
+              "actor":  "${{ github.actor }}"
+            }
+          }
+          JSON
+          )")
+
+          echo "GitHub dispatches API response: HTTP $response"
+          cat /tmp/resp.txt 2>/dev/null || true
+
+          # GitHub returns 204 on success; anything else is a real failure.
+          if [ "$response" != "204" ]; then
+            echo "::error::dispatch failed (status $response). Check that PIPELINE_DISPATCH_TOKEN has 'repo' scope on bestpass/worthy-ai-wayfinding-pipeline." >&2
+            exit 1
+          fi
+
+          echo "::notice::dispatched portal-push to bestpass/worthy-ai-wayfinding-pipeline (ref=${{ github.ref_name }}, sha=${{ github.sha }})"
