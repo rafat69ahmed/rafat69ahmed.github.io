@@ -2,9 +2,9 @@
 // the React Router JSX extractor handles. Not built or served — the pipeline
 // reads this file with ts-morph, never executes it.
 //
-// (touched to verify the env var rename: pipeline now reads LLM_API_KEY /
-// LLM_MODEL from secrets — OPENAI_* names removed. Expected outcome:
-// successful run + fresh registry in UC volume.)
+// (touched to retry the run after fixing keyword sanitization. Previous
+// run failed when LLM emitted `B2C` as a keyword — schema rejected
+// uppercase. Sanitizer now lowercases + filters before assembly.)
 
 import { Routes, Route } from "react-router-dom";
 import { useFlags } from "launchdarkly-react-client-sdk";
