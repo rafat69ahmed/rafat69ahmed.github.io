@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rafat Ahmed - Senior Software Engineer specializing in microservices architecture, scalable backend systems, and modern web platforms." />
+  <meta name="theme-color" content="#FAF8F3" />
+  <title>Rafat Ahmed - Senior Software Engineer</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ivory: {
+              DEFAULT: '#FAF8F3',
+              50: '#FCFAF6',
+              100: '#FAF8F3',
+              200: '#F2EEE6',
+              300: '#E8E2D4',
+            },
+            charcoal: {
+              DEFAULT: '#1F1B16',
+              50: '#3A352E',
+              100: '#1F1B16',
+              900: '#1A1814',
+            },
+            sage: {
+              DEFAULT: '#7BA098',
+              50: '#A6C0B9',
+              100: '#7BA098',
+              200: '#5E847B',
+              300: '#456760',
+            },
+            terracotta: {
+              DEFAULT: '#C97B5A',
+              50: '#D8967C',
+              100: '#C97B5A',
+              200: '#B0623F',
+            },
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            script: ['Caveat', 'cursive'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          maxWidth: {
+            content: '1100px',
+          },
+          boxShadow: {
+            soft: '0 6px 20px -8px rgba(31, 27, 22, 0.12)',
+            lift: '0 14px 40px -16px rgba(31, 27, 22, 0.18)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #FAF8F3;
+      color: #1F1B16;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+    .dark body, html.dark body {
+      background-color: #1A1814;
+      color: #FAF8F3;
+    }
+    .font-display { font-family: 'Fraunces', Georgia, serif; }
+    .font-script { font-family: 'Caveat', cursive; }
+    .font-mono   { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    /* Focus rings */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 2px solid #7BA098;
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* Section number underline draw on entry */
+    .num-rule {
+      display: inline-block;
+      position: relative;
+    }
+    .num-rule::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -6px;
+      height: 1px;
+      width: 0;
+      background-color: #7BA098;
+      transition: width 600ms ease-out;
+    }
+    .num-rule.in-view::after { width: 100%; }
+
+    /* Pulsing dot for status badge */
+    .pulse-dot {
+      position: relative;
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 9999px;
+      background-color: #7BA098;
+    }
+    .pulse-dot::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 9999px;
+      background-color: #7BA098;
+      animation: pulseRing 2s ease-out infinite;
+      opacity: 0.6;
+    }
+    @keyframes pulseRing {
+      0%   { transform: scale(1);   opacity: 0.6; }
+      80%  { transform: scale(2.4); opacity: 0; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    /* Fade-up on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 300ms ease-out, transform 300ms ease-out;
+      will-change: opacity, transform;
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* CTA hover lift */
+    .cta-lift { transition: transform 200ms ease-out, box-shadow 200ms ease-out, background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out; }
+    .cta-lift:hover { transform: translateY(-1px); }
+
+    /* Layered hero photo backdrop */
+    .layer-card {
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      border: 1px solid #7BA098;
+      background-color: #F2EEE6;
+    }
+    .dark .layer-card { background-color: #232019; border-color: #5E847B; }
+
+    /* Project card hover */
+    .project-card { transition: transform 220ms ease-out, box-shadow 220ms ease-out; }
+    .project-card:hover { transform: translateY(-3px); }
+
+    /* Skill pill hover */
+    .skill-pill { transition: transform 200ms ease-out, background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out; }
+    .skill-pill:hover { transform: translateY(-2px); background-color: #7BA098; color: #FAF8F3; border-color: #7BA098; }
+
+    /* Custom scrollbar (subtle) */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #F2EEE6; }
+    ::-webkit-scrollbar-thumb { background: #7BA098; border-radius: 6px; }
+    .dark ::-webkit-scrollbar-track { background: #232019; }
+
+    /* Mobile menu transition */
+    .mobile-menu { transition: max-height 220ms ease-out, opacity 220ms ease-out; max-height: 0; overflow: hidden; opacity: 0; }
+    .mobile-menu.open { max-height: 480px; opacity: 1; }
+
+    /* Disable hover-induced motion for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .cta-lift, .skill-pill, .project-card, .num-rule::after, .pulse-dot::before { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      .num-rule::after { width: 100%; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Section accent rail (timeline) */
+    .timeline-rail { background: linear-gradient(to bottom, transparent, #7BA098 12%, #7BA098 88%, transparent); }
+
+    /* Form fields */
+    .field {
+      width: 100%;
+      padding: 12px 14px;
+      background-color: #FAF8F3;
+      border: 1px solid #E8E2D4;
+      border-radius: 12px;
+      color: #1F1B16;
+      font-size: 16px;
+      transition: border-color 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out;
+    }
+    .field::placeholder { color: #8a8175; }
+    .field:focus { border-color: #7BA098; box-shadow: 0 0 0 3px rgba(123,160,152,0.18); outline: none; }
+    .field.invalid { border-color: #C97B5A; box-shadow: 0 0 0 3px rgba(201,123,90,0.18); }
+    .dark .field { background-color: #232019; border-color: #3a342c; color: #FAF8F3; }
+    .dark .field::placeholder { color: #968b7c; }
+  </style>
+</head>
+
+<body class="bg-ivory text-charcoal dark:bg-charcoal-900 dark:text-ivory selection:bg-sage/30">
+
+<!-- Skip link -->
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[1000] focus:bg-charcoal focus:text-ivory focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="sticky top-0 z-40 backdrop-blur-md bg-ivory/80 dark:bg-charcoal-900/80 border-b border-ivory-300/60 dark:border-charcoal-50/40">
+  <nav class="max-w-content mx-auto px-5 sm:px-8 h-16 flex items-center justify-between" aria-label="Main">
+    <a href="#home" class="flex items-baseline gap-2 group" aria-label="Rafat Ahmed - home">
+      <span class="font-display text-xl font-medium tracking-tight">Rafat Ahmed</span>
+      <span class="font-mono text-[11px] text-sage-200 dark:text-sage hidden sm:inline">v9.0</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-7 font-mono text-[13px]">
+      <li><a class="hover:text-sage-200 dark:hover:text-sage transition-colors" href="#about"><span class="text-sage">01</span> / about</a></li>
+      <li><a class="hover:text-sage-200 dark:hover:text-sage transition-colors" href="#experience"><span class="text-sage">02</span> / work</a></li>
+      <li><a class="hover:text-sage-200 dark:hover:text-sage transition-colors" href="#projects"><span class="text-sage">03</span> / projects</a></li>
+      <li><a class="hover:text-sage-200 dark:hover:text-sage transition-colors" href="#skills"><span class="text-sage">04</span> / toolbox</a></li>
+      <li><a class="hover:text-sage-200 dark:hover:text-sage transition-colors" href="#contact"><span class="text-sage">05</span> / hello</a></li>
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <button id="theme-toggle" class="cta-lift w-11 h-11 grid place-items-center rounded-full border border-ivory-300 dark:border-charcoal-50 hover:border-sage" aria-label="Toggle dark mode">
+        <i class="fa-regular fa-moon dark:hidden text-sm"></i>
+        <i class="fa-regular fa-sun hidden dark:inline text-sm"></i>
+      </button>
+      <button id="menu-toggle" class="md:hidden w-11 h-11 grid place-items-center rounded-full border border-ivory-300 dark:border-charcoal-50" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <i class="fa-solid fa-bars text-sm"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="mobile-menu md:hidden border-t border-ivory-300 dark:border-charcoal-50">
+    <ul class="flex flex-col py-3 px-5 sm:px-8 font-mono text-sm">
+      <li><a class="block py-3" href="#about"><span class="text-sage">01</span> / about</a></li>
+      <li><a class="block py-3" href="#experience"><span class="text-sage">02</span> / work</a></li>
+      <li><a class="block py-3" href="#projects"><span class="text-sage">03</span> / projects</a></li>
+      <li><a class="block py-3" href="#skills"><span class="text-sage">04</span> / toolbox</a></li>
+      <li><a class="block py-3" href="#contact"><span class="text-sage">05</span> / hello</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section id="home" class="relative pt-16 sm:pt-24 pb-24 sm:pb-32 overflow-hidden">
+  <div class="max-w-content mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+    <!-- Left -->
+    <div class="lg:col-span-7 reveal">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ivory-200 dark:bg-charcoal-50/40 border border-sage/40 mb-8">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span class="font-mono text-[12px] tracking-wide text-charcoal dark:text-ivory">Available for new opportunities</span>
+      </div>
+
+      <p class="font-script text-3xl sm:text-4xl text-sage-200 dark:text-sage -mb-2 ml-1">hello, friend.</p>
+      <h1 class="font-display text-5xl sm:text-6xl lg:text-[5.25rem] leading-[1.02] tracking-tight font-medium">
+        Hi, I'm <span class="italic">Rafat</span>.
+      </h1>
+
+      <p class="mt-6 max-w-xl text-base sm:text-lg text-charcoal-50 dark:text-ivory-200/80 leading-relaxed">
+        Senior Software Engineer with expertise in microservices architecture, dedicated to building scalable, functional, and intuitive web applications.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#projects" class="cta-lift inline-flex items-center gap-2 px-6 py-3 rounded-full bg-terracotta text-ivory hover:shadow-lift hover:bg-terracotta-200 font-medium text-sm">
+          See my work
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+        <a href="#contact" class="cta-lift inline-flex items-center gap-2 px-6 py-3 rounded-full border border-charcoal/20 dark:border-ivory/20 hover:border-sage hover:text-sage-200 dark:hover:text-sage font-medium text-sm">
+          Say hello
+        </a>
+        <a href="assets/documents/rafat_ahmed_cv.pdf" download class="cta-lift inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm hover:text-sage-200 dark:hover:text-sage">
+          <i class="fa-regular fa-file-lines"></i>
+          Download CV
+        </a>
+      </div>
+
+      <!-- Metrics strip -->
+      <dl class="mt-12 grid grid-cols-3 gap-6 max-w-lg">
+        <div>
+          <dt class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Subscribers reached</dt>
+          <dd class="font-display text-2xl sm:text-3xl mt-1">5M+</dd>
+        </div>
+        <div>
+          <dt class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Test coverage</dt>
+          <dd class="font-display text-2xl sm:text-3xl mt-1">82.4%</dd>
+        </div>
+        <div>
+          <dt class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Years building</dt>
+          <dd class="font-display text-2xl sm:text-3xl mt-1">9+</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Right - Layered photo -->
+    <div class="lg:col-span-5 reveal">
+      <div class="relative w-full max-w-sm mx-auto aspect-square">
+        <!-- Stacked offset cards (Halpin echo) -->
+        <div class="layer-card -rotate-6 translate-x-6 translate-y-6 opacity-60"></div>
+        <div class="layer-card rotate-3 -translate-x-3 -translate-y-3 opacity-90"></div>
+        <!-- Photo frame -->
+        <div class="absolute inset-0 rounded-2xl border-2 border-sage bg-ivory-200 dark:bg-charcoal-50 p-2 shadow-soft">
+          <img src="assets/images/profile.jpg" alt="Portrait of Rafat Ahmed" width="600" height="600" class="w-full h-full object-cover rounded-xl" />
+        </div>
+        <!-- Floating badge -->
+        <div class="absolute -bottom-5 -left-5 sm:-left-8 bg-ivory dark:bg-charcoal-900 border border-sage/40 rounded-2xl px-4 py-3 shadow-soft">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-sage/15 grid place-items-center text-sage-200 dark:text-sage" aria-hidden="true">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] uppercase tracking-wider text-sage-200 dark:text-sage">Currently</div>
+              <div class="text-sm font-medium">Backend architecture</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtle hero fade-out -->
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-ivory dark:to-charcoal-900"></div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="bg-ivory-200 dark:bg-[#221E18] py-24 sm:py-32 border-y border-ivory-300/70 dark:border-charcoal-50/30">
+  <div class="max-w-content mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12">
+
+    <!-- Section label (left rail) -->
+    <div class="lg:col-span-3 reveal">
+      <div class="lg:sticky lg:top-24">
+        <span class="font-mono text-sage-200 dark:text-sage text-sm num-rule">01 / About</span>
+        <p class="font-script text-2xl text-sage-200 dark:text-sage mt-3">a short story.</p>
+      </div>
+    </div>
+
+    <!-- Body content -->
+    <div class="lg:col-span-9 reveal">
+      <h2 class="font-display text-4xl sm:text-5xl leading-tight font-medium tracking-tight">
+        Backend architect with a soft spot for <span class="italic">thoughtful frontends</span>.
+      </h2>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-8 text-charcoal-50 dark:text-ivory-200/80 leading-relaxed">
+        <p>
+          Experienced software engineer and backend architect with over 9 years of industry expertise spanning diverse domains, platforms, and systems. For the past 7 years, I've been fully immersed in web development, bringing robust architectural thinking and scalable system design to every project.
+        </p>
+        <p>
+          I specialize in backend architecture and have efficient working knowledge of frontend architecture. My passion lies in designing reliable, maintainable infrastructure that aligns with modern best practices &mdash; TDD, Git Flow, containerization, and well-instrumented systems.
+        </p>
+      </div>
+
+      <!-- Principle cards (rhythm) -->
+      <div class="mt-10 grid sm:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/50 p-6">
+          <div class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Principle 01</div>
+          <div class="font-display text-lg mt-2">Test-driven by default</div>
+          <p class="mt-2 text-sm text-charcoal-50 dark:text-ivory-200/70">Coverage is a feature. 82.4% Jest on production code.</p>
+        </div>
+        <div class="rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/50 p-6">
+          <div class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Principle 02</div>
+          <div class="font-display text-lg mt-2">Scale, then simplify</div>
+          <p class="mt-2 text-sm text-charcoal-50 dark:text-ivory-200/70">Microservices that earn their seams &mdash; not added by reflex.</p>
+        </div>
+        <div class="rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/50 p-6">
+          <div class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Principle 03</div>
+          <div class="font-display text-lg mt-2">Containerize everything</div>
+          <p class="mt-2 text-sm text-charcoal-50 dark:text-ivory-200/70">Docker, Git Flow, CI/CD &mdash; the boring infrastructure that lets work ship.</p>
+        </div>
+      </div>
+
+      <!-- Location row -->
+      <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-[13px] text-charcoal-50 dark:text-ivory-200/80">
+        <span><i class="fa-solid fa-location-dot text-sage mr-2"></i>Dhaka, Bangladesh</span>
+        <span><i class="fa-regular fa-clock text-sage mr-2"></i>Remote-friendly</span>
+        <span><i class="fa-solid fa-cubes text-sage mr-2"></i>Backend &middot; Microservices &middot; Web</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section id="experience" class="py-24 sm:py-32">
+  <div class="max-w-content mx-auto px-5 sm:px-8">
+
+    <!-- Header row -->
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-3 reveal">
+        <span class="font-mono text-sage-200 dark:text-sage text-sm num-rule">02 / Work</span>
+        <p class="font-script text-2xl text-sage-200 dark:text-sage mt-3">things I've shipped.</p>
+      </div>
+      <div class="lg:col-span-9 reveal">
+        <h2 class="font-display text-4xl sm:text-5xl leading-tight font-medium tracking-tight">A timeline of teams, tools, and trade-offs.</h2>
+        <p class="mt-4 max-w-2xl text-charcoal-50 dark:text-ivory-200/80">From learning analytics for schools, to a 5M-subscriber news platform, to live-bidding auctions &mdash; here's the recent stretch.</p>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative mt-16">
+      <!-- Center rail (desktop) / left rail (mobile) -->
+      <div class="absolute top-0 bottom-0 w-px timeline-rail left-4 md:left-1/2 md:-translate-x-1/2" aria-hidden="true"></div>
+
+      <ol class="space-y-12 md:space-y-20">
+
+        <!-- Job 1 -->
+        <li class="relative reveal">
+          <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-7 w-3 h-3 rounded-full bg-sage ring-4 ring-ivory dark:ring-charcoal-900" aria-hidden="true"></div>
+          <div class="md:grid md:grid-cols-2 md:gap-12 items-start">
+            <!-- Date column -->
+            <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
+              <div class="font-mono text-xs text-sage-200 dark:text-sage tracking-wide">May 2024 &mdash; Present</div>
+              <div class="font-display text-xl mt-1">Vendidit Inc.</div>
+              <div class="text-sm text-charcoal-50 dark:text-ivory-200/70">Remote &middot; Senior Software Engineer</div>
+            </div>
+            <!-- Card -->
+            <div class="pl-12 md:pl-0 mt-4 md:mt-0">
+              <article class="rounded-2xl border border-sage/30 bg-ivory-200 dark:bg-charcoal-50/40 p-6 sm:p-8 shadow-soft">
+                <h3 class="font-display text-lg">Live-auction platform &amp; multi-vendor system</h3>
+                <ul class="mt-4 space-y-2 text-sm text-charcoal-50 dark:text-ivory-200/85 list-disc pl-5 marker:text-sage">
+                  <li>Designed a robust multi-vendor system for seller onboarding, inventory, and customer management.</li>
+                  <li>Built real-time auction with live video streaming, supporting <strong>thousands of concurrent users</strong>.</li>
+                  <li>Achieved 53% Jest unit-test coverage; production monitored via AWS CloudWatch.</li>
+                  <li>Integrated SendGrid for buyer-seller real-time email notifications.</li>
+                </ul>
+                <div class="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Node.js</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">NestJS</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">PostgreSQL</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">AWS</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Lambda</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">React</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Next.js</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">TypeScript</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </li>
+
+        <!-- Job 2 -->
+        <li class="relative reveal">
+          <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-7 w-3 h-3 rounded-full bg-sage ring-4 ring-ivory dark:ring-charcoal-900" aria-hidden="true"></div>
+          <div class="md:grid md:grid-cols-2 md:gap-12 items-start">
+            <!-- Card (left) -->
+            <div class="pl-12 md:pl-0 md:order-2 mt-4 md:mt-0">
+              <article class="rounded-2xl border border-sage/30 bg-ivory-200 dark:bg-charcoal-50/40 p-6 sm:p-8 shadow-soft">
+                <h3 class="font-display text-lg">Microservices, subscription system, and search</h3>
+                <ul class="mt-4 space-y-2 text-sm text-charcoal-50 dark:text-ivory-200/85 list-disc pl-5 marker:text-sage">
+                  <li>Microservice-based web apps for the leid.no rental service using Node.js &amp; Next.js.</li>
+                  <li>QR-code-based borrowing flow for tool rentals.</li>
+                  <li>Subscription system in PHP/Laravel/Node/Express used across multiple sites &mdash; <strong>5M subscribers</strong> on friflyt.no.</li>
+                  <li>Elasticsearch served via AWS Lambda; <strong>82.4% Jest coverage</strong>.</li>
+                </ul>
+                <div class="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Node.js</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Express</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">PHP</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Laravel</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">AWS</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Lambda</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Elasticsearch</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">DatoCMS</span>
+                </div>
+              </article>
+            </div>
+            <!-- Date column -->
+            <div class="pl-12 md:pl-12 md:order-1 md:text-left mt-4 md:mt-0">
+              <div class="font-mono text-xs text-sage-200 dark:text-sage tracking-wide">Dec 2021 &mdash; Apr 2024</div>
+              <div class="font-display text-xl mt-1">Cefalo Bangladesh Ltd.</div>
+              <div class="text-sm text-charcoal-50 dark:text-ivory-200/70">Hybrid &middot; Senior Software Engineer</div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Job 3 -->
+        <li class="relative reveal">
+          <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-7 w-3 h-3 rounded-full bg-sage ring-4 ring-ivory dark:ring-charcoal-900" aria-hidden="true"></div>
+          <div class="md:grid md:grid-cols-2 md:gap-12 items-start">
+            <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
+              <div class="font-mono text-xs text-sage-200 dark:text-sage tracking-wide">May 2020 &mdash; Oct 2021</div>
+              <div class="font-display text-xl mt-1">Thrive EdTech</div>
+              <div class="text-sm text-charcoal-50 dark:text-ivory-200/70">Hybrid &middot; Senior Software Engineer</div>
+            </div>
+            <div class="pl-12 md:pl-0 mt-4 md:mt-0">
+              <article class="rounded-2xl border border-sage/30 bg-ivory-200 dark:bg-charcoal-50/40 p-6 sm:p-8 shadow-soft">
+                <h3 class="font-display text-lg">Learning analytics &amp; school management</h3>
+                <ul class="mt-4 space-y-2 text-sm text-charcoal-50 dark:text-ivory-200/85 list-disc pl-5 marker:text-sage">
+                  <li>Microservice apps tracking student/teacher results and progress over time.</li>
+                  <li>Routine planning + Zoom &amp; Google Meet integration for virtual classrooms.</li>
+                  <li>End-to-end product ownership across PHP/Laravel and React stacks.</li>
+                </ul>
+                <div class="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">PHP</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">Laravel</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">MySQL</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">React</span>
+                  <span class="px-2.5 py-1 rounded-md border border-sage/40 text-sage-200 dark:text-sage bg-ivory dark:bg-charcoal-900/40">AWS</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects" class="bg-ivory-200 dark:bg-[#221E18] py-24 sm:py-32 border-y border-ivory-300/70 dark:border-charcoal-50/30">
+  <div class="max-w-content mx-auto px-5 sm:px-8">
+
+    <div class="grid lg:grid-cols-12 gap-12 mb-14">
+      <div class="lg:col-span-3 reveal">
+        <span class="font-mono text-sage-200 dark:text-sage text-sm num-rule">03 / Projects</span>
+        <p class="font-script text-2xl text-sage-200 dark:text-sage mt-3">selected work.</p>
+      </div>
+      <div class="lg:col-span-9 reveal">
+        <h2 class="font-display text-4xl sm:text-5xl leading-tight font-medium tracking-tight">Real systems with real users.</h2>
+        <p class="mt-4 max-w-2xl text-charcoal-50 dark:text-ivory-200/80">A peek at three platforms I helped architect and ship &mdash; from outdoor news to live auctions.</p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+
+      <!-- Project 1: friflyt -->
+      <article class="project-card rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/40 overflow-hidden shadow-soft hover:shadow-lift reveal">
+        <div class="aspect-[16/10] overflow-hidden bg-ivory-200 dark:bg-charcoal-50">
+          <img src="assets/images/projects/friflyt.png" alt="Screenshot of friflyt.no e-news platform" loading="lazy" width="1280" height="800" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-8 sm:p-10">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">E-news platform</span>
+            <a href="https://friflyt.no" target="_blank" rel="noopener" class="cta-lift inline-flex items-center gap-1.5 text-xs font-mono text-sage-200 dark:text-sage hover:text-terracotta">
+              friflyt.no <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+          <h3 class="font-display text-2xl">Norwegian outdoor &amp; ski news</h3>
+          <p class="mt-3 text-sm text-charcoal-50 dark:text-ivory-200/80">News, reports and stories on skiing and outdoor adventure &mdash; centered on Norwegian nature and seasonal activities. Powers <strong>5M+ subscribers</strong>.</p>
+          <div class="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">Express</span>
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">MySQL</span>
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">AWS</span>
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">Lambda</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2: leid -->
+      <article class="project-card rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/40 overflow-hidden shadow-soft hover:shadow-lift reveal lg:translate-y-12">
+        <div class="aspect-[16/10] overflow-hidden bg-ivory-200 dark:bg-charcoal-50">
+          <img src="assets/images/projects/leid.png" alt="Screenshot of leid.no e-commerce rental platform" loading="lazy" width="1280" height="800" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-8 sm:p-10">
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">E-commerce / rental</span>
+            <a href="https://leid.no" target="_blank" rel="noopener" class="cta-lift inline-flex items-center gap-1.5 text-xs font-mono text-sage-200 dark:text-sage hover:text-terracotta">
+              leid.no <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+          <h3 class="font-display text-2xl">Borrow tools, not buy them</h3>
+          <p class="mt-3 text-sm text-charcoal-50 dark:text-ivory-200/80">An e-commerce platform for renting tools, with a QR-code system that makes pickup and returns frictionless.</p>
+          <div class="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">Express</span>
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">PostgreSQL</span>
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">AWS</span>
+            <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">Lambda</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3: vendidit -->
+      <article class="project-card rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/40 overflow-hidden shadow-soft hover:shadow-lift reveal lg:col-span-2">
+        <div class="grid lg:grid-cols-5">
+          <div class="lg:col-span-3 aspect-[16/10] lg:aspect-auto overflow-hidden bg-ivory-200 dark:bg-charcoal-50">
+            <img src="assets/images/projects/vendidit.png" alt="Screenshot of vendidit.com online auction platform" loading="lazy" width="1280" height="800" class="w-full h-full object-cover" />
+          </div>
+          <div class="lg:col-span-2 p-8 sm:p-10 flex flex-col justify-center">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <span class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Online auctions</span>
+              <a href="https://vendidit.com" target="_blank" rel="noopener" class="cta-lift inline-flex items-center gap-1.5 text-xs font-mono text-sage-200 dark:text-sage hover:text-terracotta">
+                vendidit.com <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </a>
+            </div>
+            <h3 class="font-display text-2xl">Real-time bidding, smooth UX</h3>
+            <p class="mt-3 text-sm text-charcoal-50 dark:text-ivory-200/80">A live auction platform with real-time bidding and integrated video streaming &mdash; built to support thousands of concurrent users without flinching.</p>
+            <div class="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
+              <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">NestJS</span>
+              <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">PostgreSQL</span>
+              <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">AWS</span>
+              <span class="px-2.5 py-1 rounded-md bg-ivory-200 dark:bg-charcoal-900/40 text-charcoal-50 dark:text-ivory-200">Lambda</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section id="skills" class="py-24 sm:py-32">
+  <div class="max-w-content mx-auto px-5 sm:px-8">
+
+    <div class="grid lg:grid-cols-12 gap-12 mb-12">
+      <div class="lg:col-span-3 reveal">
+        <span class="font-mono text-sage-200 dark:text-sage text-sm num-rule">04 / Toolbox</span>
+        <p class="font-script text-2xl text-sage-200 dark:text-sage mt-3">my toolbox.</p>
+      </div>
+      <div class="lg:col-span-9 reveal">
+        <h2 class="font-display text-4xl sm:text-5xl leading-tight font-medium tracking-tight">The stack I reach for.</h2>
+        <p class="mt-4 max-w-2xl text-charcoal-50 dark:text-ivory-200/80">Backend-leaning, but comfortable across the boundary &mdash; tested, containerized, and deployed.</p>
+      </div>
+    </div>
+
+    <!-- Skill pill grid -->
+    <div class="reveal flex flex-wrap gap-3 sm:gap-4">
+      <!-- Each pill: icon + label -->
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-solid fa-feather text-sage-200 group-hover:text-ivory" aria-hidden="true"></i> NestJS
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-node-js text-sage-200" aria-hidden="true"></i> Node.js
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-laravel text-sage-200" aria-hidden="true"></i> Laravel
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-php text-sage-200" aria-hidden="true"></i> PHP
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-solid fa-database text-sage-200" aria-hidden="true"></i> PostgreSQL
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-solid fa-arrows-spin text-sage-200" aria-hidden="true"></i> CI/CD
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-git-alt text-sage-200" aria-hidden="true"></i> Git
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-docker text-sage-200" aria-hidden="true"></i> Docker
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-solid fa-leaf text-sage-200" aria-hidden="true"></i> MongoDB
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-html5 text-sage-200" aria-hidden="true"></i> HTML5
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-css3-alt text-sage-200" aria-hidden="true"></i> CSS3
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-square-js text-sage-200" aria-hidden="true"></i> JavaScript
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-react text-sage-200" aria-hidden="true"></i> React
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-java text-sage-200" aria-hidden="true"></i> Java
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-solid fa-database text-sage-200" aria-hidden="true"></i> MySQL
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-solid fa-vial text-sage-200" aria-hidden="true"></i> Jest
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-aws text-sage-200" aria-hidden="true"></i> AWS
+      </span>
+      <span class="skill-pill inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ivory border border-sage/40 text-sm font-mono dark:bg-charcoal-50/40">
+        <i class="fa-brands fa-python text-sage-200" aria-hidden="true"></i> Python
+      </span>
+    </div>
+
+    <p class="mt-8 font-mono text-xs text-charcoal-50/70 dark:text-ivory-200/60">// always learning &mdash; currently exploring observability, distributed tracing, and Rust</p>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="bg-ivory-200 dark:bg-[#221E18] py-24 sm:py-32 border-t border-ivory-300/70 dark:border-charcoal-50/30">
+  <div class="max-w-content mx-auto px-5 sm:px-8">
+
+    <div class="grid lg:grid-cols-12 gap-12 mb-14">
+      <div class="lg:col-span-3 reveal">
+        <span class="font-mono text-sage-200 dark:text-sage text-sm num-rule">05 / Contact</span>
+        <p class="font-script text-2xl text-sage-200 dark:text-sage mt-3">say hello.</p>
+      </div>
+      <div class="lg:col-span-9 reveal">
+        <h2 class="font-display text-4xl sm:text-5xl leading-tight font-medium tracking-tight">Have a system worth building?</h2>
+        <p class="mt-4 max-w-2xl text-charcoal-50 dark:text-ivory-200/80">I'm open to senior engineering roles &mdash; remote, hybrid, or on-site for the right team. Drop a line.</p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
+      <!-- Info column -->
+      <div class="lg:col-span-5 space-y-6 reveal">
+        <a href="mailto:rafatahmedorik@gmail.com" class="cta-lift flex items-start gap-4 p-5 rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/40 hover:border-sage hover:shadow-soft">
+          <div class="w-11 h-11 grid place-items-center rounded-xl bg-sage/15 text-sage-200 dark:text-sage shrink-0" aria-hidden="true">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Email</div>
+            <div class="text-sm sm:text-base font-medium break-all">rafatahmedorik@gmail.com</div>
+          </div>
+        </a>
+
+        <a href="tel:+8801911750945" class="cta-lift flex items-start gap-4 p-5 rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/40 hover:border-sage hover:shadow-soft">
+          <div class="w-11 h-11 grid place-items-center rounded-xl bg-sage/15 text-sage-200 dark:text-sage shrink-0" aria-hidden="true">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+          <div>
+            <div class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Phone</div>
+            <div class="text-sm sm:text-base font-medium">+880 (1911) 750-945</div>
+          </div>
+        </a>
+
+        <div class="flex items-start gap-4 p-5 rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/40">
+          <div class="w-11 h-11 grid place-items-center rounded-xl bg-sage/15 text-sage-200 dark:text-sage shrink-0" aria-hidden="true">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div>
+            <div class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage">Based in</div>
+            <div class="text-sm sm:text-base font-medium">Dhaka, Bangladesh</div>
+            <div class="text-xs text-charcoal-50 dark:text-ivory-200/70 mt-0.5">Open to remote &middot; UTC+6</div>
+          </div>
+        </div>
+
+        <!-- Socials -->
+        <div class="pt-2">
+          <div class="font-mono text-[11px] uppercase tracking-wider text-sage-200 dark:text-sage mb-3">Find me online</div>
+          <div class="flex items-center gap-3">
+            <a href="https://github.com/rafat69ahmed" target="_blank" rel="noopener" aria-label="GitHub" class="cta-lift w-11 h-11 grid place-items-center rounded-full border border-sage/40 hover:bg-sage hover:text-ivory hover:border-sage">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/rafat69ahmed/" target="_blank" rel="noopener" aria-label="LinkedIn" class="cta-lift w-11 h-11 grid place-items-center rounded-full border border-sage/40 hover:bg-sage hover:text-ivory hover:border-sage">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://facebook.com/rafat.ahmed.146" target="_blank" rel="noopener" aria-label="Facebook" class="cta-lift w-11 h-11 grid place-items-center rounded-full border border-sage/40 hover:bg-sage hover:text-ivory hover:border-sage">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form column -->
+      <div class="lg:col-span-7 reveal">
+        <form id="contact-form" novalidate class="rounded-2xl border border-sage/30 bg-ivory dark:bg-charcoal-50/40 p-6 sm:p-10 shadow-soft">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="cf-name" class="block font-mono text-[12px] uppercase tracking-wider text-sage-200 dark:text-sage mb-1.5">Name <span class="text-terracotta">*</span></label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" required minlength="2" class="field" placeholder="Your name" aria-describedby="cf-name-err" />
+              <p id="cf-name-err" class="hidden mt-1.5 text-xs text-terracotta">Please enter your name (at least 2 characters).</p>
+            </div>
+            <div>
+              <label for="cf-email" class="block font-mono text-[12px] uppercase tracking-wider text-sage-200 dark:text-sage mb-1.5">Email <span class="text-terracotta">*</span></label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" required class="field" placeholder="you@company.com" aria-describedby="cf-email-err" />
+              <p id="cf-email-err" class="hidden mt-1.5 text-xs text-terracotta">Please enter a valid email address.</p>
+            </div>
+          </div>
+          <div class="mt-5">
+            <label for="cf-subject" class="block font-mono text-[12px] uppercase tracking-wider text-sage-200 dark:text-sage mb-1.5">Subject</label>
+            <input id="cf-subject" name="subject" type="text" class="field" placeholder="What's this about?" />
+          </div>
+          <div class="mt-5">
+            <label for="cf-message" class="block font-mono text-[12px] uppercase tracking-wider text-sage-200 dark:text-sage mb-1.5">Message <span class="text-terracotta">*</span></label>
+            <textarea id="cf-message" name="message" rows="5" required minlength="10" class="field resize-y" placeholder="Tell me a bit about the project, role, or idea." aria-describedby="cf-message-err"></textarea>
+            <p id="cf-message-err" class="hidden mt-1.5 text-xs text-terracotta">Please write at least 10 characters.</p>
+          </div>
+
+          <div class="mt-7 flex flex-wrap items-center justify-between gap-4">
+            <p class="font-mono text-[11px] text-charcoal-50/70 dark:text-ivory-200/60">// I usually reply within 24 hours.</p>
+            <button type="submit" id="cf-submit" class="cta-lift inline-flex items-center gap-2 px-6 py-3 rounded-full bg-charcoal text-ivory hover:bg-sage-200 dark:bg-ivory dark:text-charcoal dark:hover:bg-sage hover:shadow-lift font-medium text-sm">
+              <span id="cf-submit-label">Send message</span>
+              <i id="cf-submit-icon" class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Success state -->
+          <div id="cf-success" role="status" aria-live="polite" class="hidden mt-5 p-4 rounded-xl border border-sage/40 bg-sage/10 text-sm">
+            <i class="fa-solid fa-circle-check text-sage-200 dark:text-sage mr-2"></i>
+            Thanks &mdash; your message is on its way. I'll get back to you shortly.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="border-t border-ivory-300 dark:border-charcoal-50/40 py-10">
+  <div class="max-w-content mx-auto px-5 sm:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <span class="font-display text-lg">Rafat Ahmed</span>
+      <span class="font-mono text-xs text-charcoal-50/70 dark:text-ivory-200/60">&middot; Senior Software Engineer</span>
+    </div>
+    <p class="font-mono text-xs text-charcoal-50/70 dark:text-ivory-200/60">
+      &copy; <span id="year">2026</span> &middot; Crafted in Dhaka with care.
+    </p>
+  </div>
+</footer>
+
+<!-- Scroll-to-top -->
+<button id="to-top" aria-label="Scroll to top" class="cta-lift fixed bottom-6 right-6 w-12 h-12 rounded-full bg-charcoal text-ivory dark:bg-ivory dark:text-charcoal grid place-items-center shadow-lift opacity-0 pointer-events-none translate-y-3 transition-all">
+  <i class="fa-solid fa-arrow-up text-sm"></i>
+</button>
+
+<script>
+(function () {
+  // ======= Theme =======
+  const THEME_KEY = 'rafat-theme-b';
+  const root = document.documentElement;
+  const stored = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (stored === 'dark' || (!stored && prefersDark)) root.classList.add('dark');
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    root.classList.toggle('dark');
+    localStorage.setItem(THEME_KEY, root.classList.contains('dark') ? 'dark' : 'light');
+  });
+
+  // ======= Mobile menu =======
+  const menuBtn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', function () {
+    const open = menu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ======= Year =======
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ======= Reveal on scroll + section number underline =======
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal, .num-rule').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal, .num-rule').forEach(function (el) { el.classList.add('in-view'); });
+  }
+
+  // ======= Scroll-to-top =======
+  const toTop = document.getElementById('to-top');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 600) {
+      toTop.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+    } else {
+      toTop.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+    }
+  }, { passive: true });
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ======= Contact form =======
+  const form = document.getElementById('contact-form');
+  const nameI = document.getElementById('cf-name');
+  const emailI = document.getElementById('cf-email');
+  const msgI = document.getElementById('cf-message');
+  const nameErr = document.getElementById('cf-name-err');
+  const emailErr = document.getElementById('cf-email-err');
+  const msgErr = document.getElementById('cf-message-err');
+  const submitBtn = document.getElementById('cf-submit');
+  const submitLabel = document.getElementById('cf-submit-label');
+  const submitIcon = document.getElementById('cf-submit-icon');
+  const success = document.getElementById('cf-success');
+
+  function setInvalid(input, errEl, isInvalid) {
+    if (isInvalid) {
+      input.classList.add('invalid');
+      errEl.classList.remove('hidden');
+      input.setAttribute('aria-invalid', 'true');
+    } else {
+      input.classList.remove('invalid');
+      errEl.classList.add('hidden');
+      input.removeAttribute('aria-invalid');
+    }
+  }
+  function emailValid(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  // Inline validation on blur
+  nameI.addEventListener('blur', function () { setInvalid(nameI, nameErr, nameI.value.trim().length < 2); });
+  emailI.addEventListener('blur', function () { setInvalid(emailI, emailErr, !emailValid(emailI.value.trim())); });
+  msgI.addEventListener('blur', function () { setInvalid(msgI, msgErr, msgI.value.trim().length < 10); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nBad = nameI.value.trim().length < 2;
+    const eBad = !emailValid(emailI.value.trim());
+    const mBad = msgI.value.trim().length < 10;
+    setInvalid(nameI, nameErr, nBad);
+    setInvalid(emailI, emailErr, eBad);
+    setInvalid(msgI, msgErr, mBad);
+    if (nBad || eBad || mBad) {
+      const first = nBad ? nameI : eBad ? emailI : msgI;
+      first.focus();
+      return;
+    }
+    // Simulate submit
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Sending...';
+    submitIcon.className = 'fa-solid fa-circle-notch fa-spin text-xs';
+    setTimeout(function () {
+      success.classList.remove('hidden');
+      submitLabel.textContent = 'Sent!';
+      submitIcon.className = 'fa-solid fa-check text-xs';
+      form.reset();
+      setTimeout(function () {
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Send message';
+        submitIcon.className = 'fa-solid fa-paper-plane text-xs';
+        success.classList.add('hidden');
+      }, 4000);
+    }, 900);
+  });
+})();
+</script>
+</body>
+</html>
