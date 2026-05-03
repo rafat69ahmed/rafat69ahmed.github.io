@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rafat Ahmed — Senior Software Engineer. Editorial portfolio. Backend architecture, microservices, scalable web infrastructure. Dhaka, Bangladesh." />
+  <meta name="theme-color" content="#F5F2EC" />
+  <title>Rafat Ahmed — Senior Software Engineer / Editorial Folio</title>
+  <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            paper: { DEFAULT: '#F5F2EC', dark: '#E8E5DD' },
+            ink:   { DEFAULT: '#0F0F0F', dark: '#0A0A0A' },
+            coral: { DEFAULT: '#FF5436', deep: '#E63B1E' },
+            sage:  { DEFAULT: '#5A6B5C', light: '#8AA08D' },
+            mute:  { DEFAULT: '#6B6B6B', dark: '#9A9A92' }
+          },
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans:  ['"Inter Tight"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono:  ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+          },
+          letterSpacing: {
+            'mono-wide': '0.18em',
+            'mono-extra': '0.28em',
+            'serif-tight': '-0.025em',
+            'serif-extra-tight': '-0.04em'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ---------- Base ---------- */
+    html, body { background-color: #F5F2EC; color: #0F0F0F; }
+    html.dark, html.dark body { background-color: #0A0A0A; color: #E8E5DD; }
+    body {
+      font-family: '"Inter Tight"', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ---------- Display serif ---------- */
+    .font-display { font-family: '"Instrument Serif"', Georgia, serif; line-height: 1.04; letter-spacing: -0.025em; }
+    .font-display-italic { font-family: '"Instrument Serif"', Georgia, serif; font-style: italic; }
+
+    /* ---------- Mono small caps / kicker ---------- */
+    .kicker {
+      font-family: '"JetBrains Mono"', ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .label-mono {
+      font-family: '"JetBrains Mono"', ui-monospace, monospace;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+    .section-num {
+      font-family: '"JetBrains Mono"', ui-monospace, monospace;
+      letter-spacing: 0.2em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+    }
+
+    /* ---------- Coral underline link (draws from left on hover) ---------- */
+    .ulink {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 2px;
+    }
+    .ulink::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #FF5436;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 250ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .ulink:hover::after,
+    .ulink:focus-visible::after { transform: scaleX(1); }
+
+    /* ---------- Nav link active dot ---------- */
+    .nav-link {
+      position: relative;
+      transition: color 200ms ease-out;
+    }
+    .nav-link:hover { color: #FF5436; }
+
+    /* ---------- Coral arrow translate ---------- */
+    .arrow-link { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .arrow-link .arrow {
+      display: inline-block;
+      transition: transform 250ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .arrow-link:hover .arrow,
+    .arrow-link:focus-visible .arrow { transform: translateX(6px); }
+
+    /* ---------- Pulsing coral dot ---------- */
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 9999px;
+      background: #FF5436;
+      box-shadow: 0 0 0 0 rgba(255, 84, 54, 0.55);
+      animation: pulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255, 84, 54, 0.55); }
+      70%  { box-shadow: 0 0 0 14px rgba(255, 84, 54, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 84, 54, 0); }
+    }
+
+    /* ---------- Reveal on scroll ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Project image hover (subtle desat) ---------- */
+    .img-hover {
+      transition: filter 350ms ease-out, transform 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      filter: saturate(1);
+    }
+    .img-hover:hover { filter: saturate(0.7) contrast(1.02); transform: scale(1.005); }
+
+    /* ---------- Hero portrait rotation ---------- */
+    .portrait-rot { transform: rotate(-1.5deg); transition: transform 400ms ease-out; }
+    .portrait-rot:hover { transform: rotate(0deg); }
+
+    /* ---------- Drop cap ---------- */
+    .dropcap::first-letter {
+      font-family: '"Instrument Serif"', Georgia, serif;
+      font-size: 4.4rem;
+      line-height: 0.85;
+      float: left;
+      padding: 0.32rem 0.55rem 0 0;
+      color: #FF5436;
+      font-weight: 400;
+    }
+
+    /* ---------- Hairline rule ---------- */
+    .hairline {
+      height: 1px; width: 100%;
+      background: rgba(15, 15, 15, 0.18);
+    }
+    html.dark .hairline { background: rgba(232, 229, 221, 0.16); }
+
+    /* ---------- Focus rings ---------- */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 2px solid #FF5436;
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+
+    /* ---------- Selection ---------- */
+    ::selection { background: #FF5436; color: #F5F2EC; }
+    html.dark ::selection { background: #FF5436; color: #0A0A0A; }
+
+    /* ---------- Marquee divider ---------- */
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 40s linear infinite;
+      will-change: transform;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ---------- Form ---------- */
+    .field-input {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(15,15,15,0.2);
+      padding: 14px 0 12px;
+      font-family: '"Inter Tight"', sans-serif;
+      font-size: 16px; /* prevent iOS zoom */
+      color: inherit;
+      transition: border-color 200ms ease-out;
+      min-height: 48px;
+    }
+    .field-input:focus { outline: none; border-bottom-color: #FF5436; }
+    html.dark .field-input { border-bottom-color: rgba(232,229,221,0.22); }
+    html.dark .field-input:focus { border-bottom-color: #FF5436; }
+
+    /* ---------- Mobile menu ---------- */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    /* ---------- Scroll-to-top ---------- */
+    .to-top {
+      opacity: 0; pointer-events: none;
+      transition: opacity 250ms ease-out, transform 250ms ease-out;
+    }
+    .to-top.visible { opacity: 1; pointer-events: auto; }
+    .to-top:hover { transform: translateY(-3px); }
+
+    /* ---------- Reduced motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .pulse-dot { box-shadow: none; animation: none; }
+      .marquee-track { animation: none; }
+    }
+
+    /* ---------- Touch targets for nav ---------- */
+    .nav-link { padding: 8px 4px; min-height: 44px; display: inline-flex; align-items: center; }
+
+    /* ---------- Dark surface utility ---------- */
+    html.dark .bg-paper { background-color: #0A0A0A !important; }
+
+    /* ---------- Container ---------- */
+    .container-edit {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    @media (min-width: 768px) { .container-edit { padding-left: 2.5rem; padding-right: 2.5rem; } }
+    @media (min-width: 1024px) { .container-edit { padding-left: 4rem; padding-right: 4rem; } }
+    @media (min-width: 1280px) { .container-edit { padding-left: 5.5rem; padding-right: 5.5rem; } }
+
+    /* ---------- Hero scale ---------- */
+    .hero-headline {
+      font-size: clamp(2.6rem, 9.5vw, 9.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.035em;
+    }
+    .section-headline {
+      font-size: clamp(2.4rem, 6.5vw, 6rem);
+      line-height: 1.02;
+      letter-spacing: -0.028em;
+    }
+    .signoff {
+      font-size: clamp(3rem, 11vw, 11rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    /* ---------- Skip link ---------- */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: #0F0F0F;
+      color: #F5F2EC;
+      padding: 12px 16px;
+      font-family: '"JetBrains Mono"', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 12px; top: 12px; }
+  </style>
+</head>
+
+<body class="bg-paper text-ink dark:bg-ink-dark dark:text-paper-dark antialiased">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-40 bg-paper/85 dark:bg-ink-dark/85 backdrop-blur-md border-b border-ink/10 dark:border-paper-dark/15">
+    <div class="container-edit flex items-center justify-between h-16 md:h-20">
+
+      <!-- Brand -->
+      <a href="#hero" class="flex items-center gap-3 group" aria-label="Rafat Ahmed — Home">
+        <span class="font-mono text-[0.72rem] tracking-mono-wide uppercase">
+          <span class="text-coral">§</span> Rafat Ahmed
+        </span>
+        <span class="hidden md:inline-block label-mono text-mute dark:text-mute-dark">Editorial Folio /// 2026</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+        <a href="#about" class="nav-link label-mono">01 About</a>
+        <a href="#experience" class="nav-link label-mono">02 Work</a>
+        <a href="#projects" class="nav-link label-mono">03 Shipping</a>
+        <a href="#skills" class="nav-link label-mono">04 Stack</a>
+        <a href="#contact" class="nav-link label-mono">05 Contact</a>
+      </nav>
+
+      <!-- Right cluster -->
+      <div class="flex items-center gap-3">
+        <button id="theme-toggle" type="button" aria-label="Toggle dark mode" class="w-11 h-11 flex items-center justify-center rounded-full border border-ink/15 dark:border-paper-dark/20 hover:border-coral hover:text-coral transition-colors">
+          <!-- sun -->
+          <svg id="icon-sun" class="hidden dark:block w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <!-- moon -->
+          <svg id="icon-moon" class="block dark:hidden w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <a href="../../../assets/documents/rafat_ahmed_cv.pdf" download class="hidden md:inline-flex items-center gap-2 label-mono px-4 h-11 border border-ink/20 dark:border-paper-dark/25 hover:bg-ink hover:text-paper dark:hover:bg-paper-dark dark:hover:text-ink-dark transition-colors">
+          CV.pdf
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+
+        <button id="menu-open" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden w-11 h-11 flex flex-col items-center justify-center gap-1.5">
+          <span class="block w-5 h-px bg-current"></span>
+          <span class="block w-5 h-px bg-current"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MOBILE MENU OVERLAY
+  ============================================================ -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 z-50 bg-paper dark:bg-ink-dark md:hidden" role="dialog" aria-modal="true" aria-label="Mobile menu">
+    <div class="container-edit h-16 flex items-center justify-between border-b border-ink/10 dark:border-paper-dark/15">
+      <span class="font-mono text-[0.72rem] tracking-mono-wide uppercase"><span class="text-coral">§</span> Menu</span>
+      <button id="menu-close" type="button" aria-label="Close menu" class="w-11 h-11 flex items-center justify-center">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="container-edit pt-12 pb-10 flex flex-col" aria-label="Mobile primary">
+      <a href="#about" class="mobile-link group flex items-baseline justify-between border-b border-ink/10 dark:border-paper-dark/12 py-6">
+        <span class="font-display text-5xl">About</span>
+        <span class="label-mono text-mute group-hover:text-coral">§ 01</span>
+      </a>
+      <a href="#experience" class="mobile-link group flex items-baseline justify-between border-b border-ink/10 dark:border-paper-dark/12 py-6">
+        <span class="font-display text-5xl">Work</span>
+        <span class="label-mono text-mute group-hover:text-coral">§ 02</span>
+      </a>
+      <a href="#projects" class="mobile-link group flex items-baseline justify-between border-b border-ink/10 dark:border-paper-dark/12 py-6">
+        <span class="font-display text-5xl">Shipping</span>
+        <span class="label-mono text-mute group-hover:text-coral">§ 03</span>
+      </a>
+      <a href="#skills" class="mobile-link group flex items-baseline justify-between border-b border-ink/10 dark:border-paper-dark/12 py-6">
+        <span class="font-display text-5xl">Stack</span>
+        <span class="label-mono text-mute group-hover:text-coral">§ 04</span>
+      </a>
+      <a href="#contact" class="mobile-link group flex items-baseline justify-between border-b border-ink/10 dark:border-paper-dark/12 py-6">
+        <span class="font-display text-5xl">Contact</span>
+        <span class="label-mono text-mute group-hover:text-coral">§ 05</span>
+      </a>
+
+      <a href="../../../assets/documents/rafat_ahmed_cv.pdf" download class="mt-10 inline-flex items-center justify-between label-mono border border-ink/25 dark:border-paper-dark/25 h-12 px-5 hover:bg-coral hover:border-coral hover:text-paper transition-colors">
+        Download CV.pdf
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </nav>
+  </div>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main id="main">
+
+    <!-- ============================================================
+         HERO — § COVER
+    ============================================================ -->
+    <section id="hero" class="relative pt-28 md:pt-36 pb-20 md:pb-28">
+      <div class="container-edit">
+
+        <!-- Top meta strip -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-12 md:mb-20">
+          <div class="flex items-center gap-3">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span class="label-mono text-ink dark:text-paper-dark">Available for new opportunities — Dhaka, BD</span>
+          </div>
+          <div class="hidden md:flex items-center gap-6">
+            <span class="label-mono text-mute dark:text-mute-dark">Issue 026 / Vol. IX</span>
+            <span class="label-mono text-mute dark:text-mute-dark">Spring 2026</span>
+          </div>
+        </div>
+
+        <!-- Cover grid -->
+        <div class="grid grid-cols-12 gap-6 md:gap-10 items-start">
+
+          <!-- Headline -->
+          <div class="col-span-12 lg:col-span-8 order-2 lg:order-1">
+            <p class="kicker text-coral mb-6">§ Cover / The Senior Engineer</p>
+            <h1 class="font-display hero-headline">
+              <span class="block">Senior software</span>
+              <span class="block">engineer building</span>
+              <span class="block">
+                <span class="font-display-italic text-coral">scalable</span> web infrastructure.
+              </span>
+            </h1>
+
+            <div class="mt-10 md:mt-14 grid grid-cols-12 gap-6">
+              <div class="col-span-12 md:col-span-7">
+                <p class="text-lg md:text-xl leading-relaxed text-ink/80 dark:text-paper-dark/80" style="max-width: 60ch;">
+                  Nine years across backend architecture, microservices and the messy middle where systems meet people. Currently shipping multi-vendor commerce and real-time auctions for <span class="font-display-italic">Vendidit</span>.
+                </p>
+              </div>
+              <div class="col-span-12 md:col-span-5 md:pl-6 md:border-l border-ink/15 dark:border-paper-dark/15">
+                <dl class="space-y-3">
+                  <div class="flex items-baseline justify-between">
+                    <dt class="label-mono text-mute dark:text-mute-dark">Based</dt>
+                    <dd class="font-mono text-sm">Dhaka, BD</dd>
+                  </div>
+                  <div class="flex items-baseline justify-between">
+                    <dt class="label-mono text-mute dark:text-mute-dark">Experience</dt>
+                    <dd class="font-mono text-sm">9+ years</dd>
+                  </div>
+                  <div class="flex items-baseline justify-between">
+                    <dt class="label-mono text-mute dark:text-mute-dark">Focus</dt>
+                    <dd class="font-mono text-sm">Backend / Microservices</dd>
+                  </div>
+                  <div class="flex items-baseline justify-between">
+                    <dt class="label-mono text-mute dark:text-mute-dark">Status</dt>
+                    <dd class="font-mono text-sm text-coral">Open to roles</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="mt-12 flex flex-wrap items-center gap-4">
+              <a href="#projects" class="arrow-link inline-flex items-center gap-3 label-mono bg-ink text-paper dark:bg-paper-dark dark:text-ink-dark h-12 px-6 hover:bg-coral hover:text-paper transition-colors">
+                View Selected Work
+                <span class="arrow">&rarr;</span>
+              </a>
+              <a href="#contact" class="arrow-link label-mono h-12 px-6 inline-flex items-center border border-ink/25 dark:border-paper-dark/25 hover:border-coral hover:text-coral transition-colors">
+                Start a Conversation
+                <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Portrait -->
+          <div class="col-span-12 lg:col-span-4 order-1 lg:order-2">
+            <figure class="relative">
+              <div class="aspect-square overflow-hidden border border-ink/15 dark:border-paper-dark/20 portrait-rot bg-ink/5 dark:bg-paper-dark/10">
+                <img src="../../../assets/images/profile.jpg" alt="Portrait of Rafat Ahmed, Senior Software Engineer based in Dhaka, Bangladesh." width="640" height="640" class="w-full h-full object-cover img-hover" loading="eager" decoding="async" />
+              </div>
+              <figcaption class="mt-4 flex items-start justify-between gap-4">
+                <span class="label-mono text-mute dark:text-mute-dark">Plate I — <span class="text-ink dark:text-paper-dark">Rafat Ahmed</span></span>
+                <span class="label-mono text-mute dark:text-mute-dark">Photo / 2026</span>
+              </figcaption>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bottom hairline + scroll cue -->
+      <div class="container-edit mt-20 md:mt-28">
+        <div class="hairline"></div>
+        <div class="flex items-center justify-between pt-5">
+          <span class="label-mono text-mute dark:text-mute-dark">Scroll to read</span>
+          <span class="label-mono text-mute dark:text-mute-dark">P. 01</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MARQUEE STRIP
+    ============================================================ -->
+    <section aria-hidden="true" class="overflow-hidden border-y border-ink/15 dark:border-paper-dark/15 py-5 bg-paper dark:bg-ink-dark">
+      <div class="marquee-track whitespace-nowrap">
+        <div class="flex items-center gap-12 label-mono text-mute dark:text-mute-dark">
+          <span>Microservices</span><span class="text-coral">&bull;</span>
+          <span>Node.js / NestJS</span><span class="text-coral">&bull;</span>
+          <span>PostgreSQL</span><span class="text-coral">&bull;</span>
+          <span>AWS &amp; Lambda</span><span class="text-coral">&bull;</span>
+          <span>Test-Driven Development</span><span class="text-coral">&bull;</span>
+          <span>Docker</span><span class="text-coral">&bull;</span>
+          <span>Backend Architecture</span><span class="text-coral">&bull;</span>
+          <span>9+ Years Shipping</span><span class="text-coral">&bull;</span>
+        </div>
+        <div class="flex items-center gap-12 label-mono text-mute dark:text-mute-dark" aria-hidden="true">
+          <span>Microservices</span><span class="text-coral">&bull;</span>
+          <span>Node.js / NestJS</span><span class="text-coral">&bull;</span>
+          <span>PostgreSQL</span><span class="text-coral">&bull;</span>
+          <span>AWS &amp; Lambda</span><span class="text-coral">&bull;</span>
+          <span>Test-Driven Development</span><span class="text-coral">&bull;</span>
+          <span>Docker</span><span class="text-coral">&bull;</span>
+          <span>Backend Architecture</span><span class="text-coral">&bull;</span>
+          <span>9+ Years Shipping</span><span class="text-coral">&bull;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT — § 01
+    ============================================================ -->
+    <section id="about" class="py-28 md:py-40 scroll-mt-24">
+      <div class="container-edit">
+        <div class="grid grid-cols-12 gap-6 md:gap-10">
+
+          <!-- Section header -->
+          <div class="col-span-12 lg:col-span-12 mb-12 md:mb-20 reveal">
+            <div class="flex items-center justify-between mb-6">
+              <span class="section-num text-coral">§ 01 / About</span>
+              <span class="section-num text-mute dark:text-mute-dark">P. 02</span>
+            </div>
+            <h2 class="font-display section-headline">
+              A backend architect, <span class="font-display-italic">first.</span>
+            </h2>
+            <p class="kicker mt-6 text-mute dark:text-mute-dark">An introduction — Nine years, three continents of clients, one obsession.</p>
+          </div>
+
+          <!-- Body grid -->
+          <div class="col-span-12 lg:col-span-7 reveal">
+            <p class="dropcap text-base md:text-lg leading-[1.7] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+              Experienced software engineer and backend architect with over nine years of industry expertise spanning diverse domains, platforms and systems. For the past seven years I have been fully immersed in web development, bringing robust architectural thinking and scalable system design to every project I touch.
+            </p>
+            <p class="mt-6 text-base md:text-lg leading-[1.7] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+              I specialize in backend architecture and possess efficient knowledge of frontend architecture. My passion lies in designing reliable, maintainable infrastructures that align with modern best practices &mdash; test-driven development, disciplined Git Flow, and containerization with Docker. My background also includes hands-on experience in product research and management, giving me a well-rounded perspective on building and delivering impactful software.
+            </p>
+
+            <div class="mt-10 grid grid-cols-3 gap-6 max-w-md">
+              <div>
+                <div class="font-display text-5xl text-coral leading-none">9+</div>
+                <div class="label-mono text-mute dark:text-mute-dark mt-2">Years</div>
+              </div>
+              <div>
+                <div class="font-display text-5xl leading-none">5M</div>
+                <div class="label-mono text-mute dark:text-mute-dark mt-2">Subscribers reached</div>
+              </div>
+              <div>
+                <div class="font-display text-5xl leading-none">82.4%</div>
+                <div class="label-mono text-mute dark:text-mute-dark mt-2">Test coverage</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: about image + meta -->
+          <div class="col-span-12 lg:col-span-5 lg:pl-8 reveal">
+            <figure>
+              <div class="aspect-[4/3] overflow-hidden border border-ink/15 dark:border-paper-dark/20 bg-ink/5 dark:bg-paper-dark/10">
+                <img src="../../../assets/images/about.png" alt="Illustration: developer at work, representing Rafat's craft and process." width="800" height="600" class="w-full h-full object-cover img-hover" loading="lazy" decoding="async" />
+              </div>
+              <figcaption class="label-mono text-mute dark:text-mute-dark mt-4 flex items-center justify-between">
+                <span>Plate II — Working method</span>
+                <span>Fig. 02</span>
+              </figcaption>
+            </figure>
+
+            <ul class="mt-8 divide-y divide-ink/10 dark:divide-paper-dark/12">
+              <li class="py-3 flex items-center justify-between">
+                <span class="label-mono text-mute dark:text-mute-dark">Discipline</span>
+                <span class="font-mono text-sm">Test-Driven Development</span>
+              </li>
+              <li class="py-3 flex items-center justify-between">
+                <span class="label-mono text-mute dark:text-mute-dark">Workflow</span>
+                <span class="font-mono text-sm">Git Flow / Code Review</span>
+              </li>
+              <li class="py-3 flex items-center justify-between">
+                <span class="label-mono text-mute dark:text-mute-dark">Delivery</span>
+                <span class="font-mono text-sm">Docker / CI/CD</span>
+              </li>
+              <li class="py-3 flex items-center justify-between">
+                <span class="label-mono text-mute dark:text-mute-dark">Strength</span>
+                <span class="font-mono text-sm">Microservices Design</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EXPERIENCE — § 02
+    ============================================================ -->
+    <section id="experience" class="py-28 md:py-40 bg-paper border-t border-ink/10 dark:border-paper-dark/15 scroll-mt-24">
+      <div class="container-edit">
+
+        <div class="mb-16 md:mb-24 reveal">
+          <div class="flex items-center justify-between mb-6">
+            <span class="section-num text-coral">§ 02 / Work</span>
+            <span class="section-num text-mute dark:text-mute-dark">P. 03</span>
+          </div>
+          <h2 class="font-display section-headline">
+            Roles, in <span class="font-display-italic">long form.</span>
+          </h2>
+          <p class="kicker mt-6 text-mute dark:text-mute-dark">A selection of recent work — 2020 &rarr; 2026</p>
+        </div>
+
+        <!-- Article-style entries -->
+        <div class="space-y-24 md:space-y-32">
+
+          <!-- Entry 1: Vendidit -->
+          <article class="grid grid-cols-12 gap-6 md:gap-10 reveal">
+            <header class="col-span-12 lg:col-span-4">
+              <div class="label-mono text-mute dark:text-mute-dark mb-4">Article 01 — Present</div>
+              <h3 class="font-display text-5xl md:text-6xl leading-[0.98] tracking-serif-extra-tight">Vendidit Inc.</h3>
+              <p class="label-mono mt-3 text-coral">Senior Software Engineer</p>
+              <p class="font-mono text-sm text-mute dark:text-mute-dark mt-2">May 2024 — Present &middot; Remote</p>
+            </header>
+
+            <div class="col-span-12 lg:col-span-8 lg:pl-10 lg:border-l border-ink/15 dark:border-paper-dark/15">
+              <p class="text-base md:text-[1.05rem] leading-[1.75] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+                Designed a robust multi-vendor commerce system from the ground up &mdash; seller onboarding, inventory and customer management woven into a single coherent platform. Wired SendGrid into the spine for real-time buyer-seller email notifications, instrumented the runtime with AWS CloudWatch, and pushed unit-test coverage to <span class="font-medium">53% with Jest</span>.
+              </p>
+              <p class="mt-5 text-base md:text-[1.05rem] leading-[1.75] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+                Most of the engineering joy lived in the auction layer: real-time bidding paired with live video streaming, engineered to stay fast and fair as the platform scaled to support <span class="font-medium">thousands of concurrent users</span>. The role is as much cross-functional craft as it is code &mdash; aligning engineering decisions with the commercial reality the business is chasing.
+              </p>
+
+              <div class="mt-7 flex flex-wrap gap-2">
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Node.js</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">NestJS</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">PostgreSQL</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">AWS</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Lambda</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">React</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Next.js</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">TypeScript</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="hairline"></div>
+
+          <!-- Entry 2: Cefalo -->
+          <article class="grid grid-cols-12 gap-6 md:gap-10 reveal">
+            <header class="col-span-12 lg:col-span-4">
+              <div class="label-mono text-mute dark:text-mute-dark mb-4">Article 02</div>
+              <h3 class="font-display text-5xl md:text-6xl leading-[0.98] tracking-serif-extra-tight">Cefalo Bangladesh</h3>
+              <p class="label-mono mt-3 text-coral">Senior Software Engineer</p>
+              <p class="font-mono text-sm text-mute dark:text-mute-dark mt-2">Dec 2021 — Apr 2024 &middot; Hybrid</p>
+            </header>
+
+            <div class="col-span-12 lg:col-span-8 lg:pl-10 lg:border-l border-ink/15 dark:border-paper-dark/15">
+              <p class="text-base md:text-[1.05rem] leading-[1.75] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+                Two and a half years inside Norwegian product engineering &mdash; building microservice-based web apps for the rental marketplace <em class="font-display-italic">leid.no</em> with Node.js and Next.js, including a QR-code-driven borrowing flow that turned the physical handoff of tools into a frictionless tap. Architected and maintained a subscription system in PHP / Laravel / Node / Express used across multiple sites including <em class="font-display-italic">friflyt.no</em>, serving a footprint of <span class="font-medium">5M subscribers</span>.
+              </p>
+              <p class="mt-5 text-base md:text-[1.05rem] leading-[1.75] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+                On the data side I served Elasticsearch through AWS Lambda and shipped a handful of custom Node modules that stuck. The engineering culture rewarded rigour, which is how the team and I held <span class="font-medium">82.4% unit-test coverage with Jest</span> across services that genuinely needed to stay up.
+              </p>
+
+              <div class="mt-7 flex flex-wrap gap-2">
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Node.js</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Express</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">PHP</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Laravel</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">AWS</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">TypeScript</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Dato CMS</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Elasticsearch</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Lambda</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="hairline"></div>
+
+          <!-- Entry 3: Thrive -->
+          <article class="grid grid-cols-12 gap-6 md:gap-10 reveal">
+            <header class="col-span-12 lg:col-span-4">
+              <div class="label-mono text-mute dark:text-mute-dark mb-4">Article 03</div>
+              <h3 class="font-display text-5xl md:text-6xl leading-[0.98] tracking-serif-extra-tight">Thrive EdTech</h3>
+              <p class="label-mono mt-3 text-coral">Senior Software Engineer</p>
+              <p class="font-mono text-sm text-mute dark:text-mute-dark mt-2">May 2020 — Oct 2021 &middot; Hybrid</p>
+            </header>
+
+            <div class="col-span-12 lg:col-span-8 lg:pl-10 lg:border-l border-ink/15 dark:border-paper-dark/15">
+              <p class="text-base md:text-[1.05rem] leading-[1.75] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+                Built microservice web applications for learning analytics &mdash; tools that helped teachers and students see the curve of progress over time, not just the snapshot of a single grade. The platform handled student and teacher results with a quiet honesty about what the numbers actually meant.
+              </p>
+              <p class="mt-5 text-base md:text-[1.05rem] leading-[1.75] text-ink/85 dark:text-paper-dark/85" style="max-width: 65ch;">
+                Designed a school management layer with routine planning and folded in Zoom and Google Meet for virtual classrooms when the world unexpectedly demanded that schools live entirely on the web. A formative role in shipping software to people who had no choice but to depend on it working.
+              </p>
+
+              <div class="mt-7 flex flex-wrap gap-2">
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">PHP</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">Laravel</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">MySQL</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">React</span>
+                <span class="label-mono px-2.5 py-1 border border-ink/20 dark:border-paper-dark/20">AWS</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECTS — § 03
+    ============================================================ -->
+    <section id="projects" class="py-28 md:py-40 scroll-mt-24">
+      <div class="container-edit">
+        <div class="mb-16 md:mb-24 reveal">
+          <div class="flex items-center justify-between mb-6">
+            <span class="section-num text-coral">§ 03 / Shipping</span>
+            <span class="section-num text-mute dark:text-mute-dark">P. 04</span>
+          </div>
+          <h2 class="font-display section-headline">
+            Projects, <span class="font-display-italic">in print.</span>
+          </h2>
+          <p class="kicker mt-6 text-mute dark:text-mute-dark">Three platforms — auction, rental, editorial. Live, scaled, in production.</p>
+        </div>
+      </div>
+
+      <!-- Featured / Full-bleed: Vendidit -->
+      <article class="reveal">
+        <div class="w-full">
+          <div class="aspect-[16/8] md:aspect-[21/9] overflow-hidden bg-ink/5 dark:bg-paper-dark/10 border-y border-ink/15 dark:border-paper-dark/15">
+            <img src="../../../assets/images/projects/vendidit.png" alt="Vendidit — online auction platform with real-time bidding interface." width="2100" height="900" class="w-full h-full object-cover img-hover" loading="lazy" decoding="async" />
+          </div>
+        </div>
+
+        <div class="container-edit">
+          <div class="grid grid-cols-12 gap-6 md:gap-10 pt-10">
+            <div class="col-span-12 md:col-span-3">
+              <div class="label-mono text-coral">Work / 01 — Featured</div>
+              <div class="font-mono text-sm text-mute dark:text-mute-dark mt-2">vendidit.com</div>
+            </div>
+            <div class="col-span-12 md:col-span-6">
+              <h3 class="font-display text-4xl md:text-5xl leading-[1.02] tracking-serif-extra-tight">Online Auction Platform</h3>
+              <p class="mt-4 text-base md:text-lg leading-[1.7] text-ink/80 dark:text-paper-dark/80" style="max-width: 60ch;">
+                Real-time bidding on items with a smooth, interactive UX. Live video streaming wired through the auction layer for higher engagement and fairness across thousands of concurrent buyers.
+              </p>
+            </div>
+            <div class="col-span-12 md:col-span-3 md:text-right">
+              <div class="label-mono text-mute dark:text-mute-dark mb-2">Stack</div>
+              <p class="font-mono text-sm">NestJS &middot; PostgreSQL &middot; AWS &middot; Lambda</p>
+              <a href="https://vendidit.com" target="_blank" rel="noopener" class="arrow-link mt-6 inline-flex text-coral label-mono ulink">
+                View Project <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2-up grid -->
+      <div class="container-edit mt-24 md:mt-32">
+        <div class="grid grid-cols-12 gap-10 md:gap-14">
+
+          <!-- Project 02: friflyt -->
+          <article class="col-span-12 md:col-span-6 reveal">
+            <a href="https://friflyt.no" target="_blank" rel="noopener" class="block group">
+              <div class="aspect-[4/3] overflow-hidden bg-ink/5 dark:bg-paper-dark/10 border border-ink/15 dark:border-paper-dark/20">
+                <img src="../../../assets/images/projects/friflyt.png" alt="friflyt.no — Norwegian outdoor and skiing news platform." width="1200" height="900" class="w-full h-full object-cover img-hover" loading="lazy" decoding="async" />
+              </div>
+            </a>
+            <div class="mt-6 flex items-baseline justify-between">
+              <span class="label-mono text-coral">Work / 02</span>
+              <span class="font-mono text-sm text-mute dark:text-mute-dark">friflyt.no</span>
+            </div>
+            <h3 class="font-display text-3xl md:text-4xl leading-[1.05] mt-2">E-news Platform</h3>
+            <p class="mt-3 text-base leading-[1.7] text-ink/80 dark:text-paper-dark/80" style="max-width: 55ch;">
+              News, reports and field journalism on skiing and outdoor adventure &mdash; centred on Norwegian nature and the rhythms of seasonal life. Editorial CMS over a custom Express backend.
+            </p>
+            <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span class="label-mono text-mute dark:text-mute-dark">Stack:</span>
+              <span class="font-mono text-sm">Express</span>
+              <span class="text-mute">&middot;</span>
+              <span class="font-mono text-sm">MySQL</span>
+              <span class="text-mute">&middot;</span>
+              <span class="font-mono text-sm">AWS</span>
+              <span class="text-mute">&middot;</span>
+              <span class="font-mono text-sm">Lambda</span>
+            </div>
+            <a href="https://friflyt.no" target="_blank" rel="noopener" class="arrow-link mt-6 text-coral label-mono ulink inline-flex">
+              View Project <span class="arrow">&rarr;</span>
+            </a>
+          </article>
+
+          <!-- Project 03: leid -->
+          <article class="col-span-12 md:col-span-6 md:mt-24 reveal">
+            <a href="https://leid.no" target="_blank" rel="noopener" class="block group">
+              <div class="aspect-[4/3] overflow-hidden bg-ink/5 dark:bg-paper-dark/10 border border-ink/15 dark:border-paper-dark/20">
+                <img src="../../../assets/images/projects/leid.png" alt="leid.no — tool rental e-commerce platform with QR-code borrowing flow." width="1200" height="900" class="w-full h-full object-cover img-hover" loading="lazy" decoding="async" />
+              </div>
+            </a>
+            <div class="mt-6 flex items-baseline justify-between">
+              <span class="label-mono text-coral">Work / 03</span>
+              <span class="font-mono text-sm text-mute dark:text-mute-dark">leid.no</span>
+            </div>
+            <h3 class="font-display text-3xl md:text-4xl leading-[1.05] mt-2">E-commerce / Rental</h3>
+            <p class="mt-3 text-base leading-[1.7] text-ink/80 dark:text-paper-dark/80" style="max-width: 55ch;">
+              An e-commerce platform for renting tools instead of buying them &mdash; complete with a QR-code system for fast pickup and return. Built on a microservice spine in Node and Next.js.
+            </p>
+            <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span class="label-mono text-mute dark:text-mute-dark">Stack:</span>
+              <span class="font-mono text-sm">Express</span>
+              <span class="text-mute">&middot;</span>
+              <span class="font-mono text-sm">PostgreSQL</span>
+              <span class="text-mute">&middot;</span>
+              <span class="font-mono text-sm">AWS</span>
+              <span class="text-mute">&middot;</span>
+              <span class="font-mono text-sm">Lambda</span>
+            </div>
+            <a href="https://leid.no" target="_blank" rel="noopener" class="arrow-link mt-6 text-coral label-mono ulink inline-flex">
+              View Project <span class="arrow">&rarr;</span>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SKILLS — § 04
+    ============================================================ -->
+    <section id="skills" class="py-28 md:py-40 border-t border-ink/10 dark:border-paper-dark/15 scroll-mt-24">
+      <div class="container-edit">
+
+        <div class="mb-16 md:mb-24 reveal">
+          <div class="flex items-center justify-between mb-6">
+            <span class="section-num text-coral">§ 04 / Stack</span>
+            <span class="section-num text-mute dark:text-mute-dark">P. 05</span>
+          </div>
+          <h2 class="font-display section-headline">
+            The <span class="font-display-italic">working</span> stack.
+          </h2>
+          <p class="kicker mt-6 text-mute dark:text-mute-dark">Tools used in production, listed by category — not by logo.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10 reveal">
+
+          <!-- Backend -->
+          <div>
+            <div class="flex items-baseline justify-between border-b border-ink/20 dark:border-paper-dark/20 pb-3 mb-5">
+              <h3 class="label-mono">Backend</h3>
+              <span class="label-mono text-coral">01</span>
+            </div>
+            <ul class="font-mono text-sm space-y-3">
+              <li class="flex items-center justify-between"><span>NestJS</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>Node.js</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>Laravel</span><span class="text-mute dark:text-mute-dark">strong</span></li>
+              <li class="flex items-center justify-between"><span>PHP</span><span class="text-mute dark:text-mute-dark">strong</span></li>
+              <li class="flex items-center justify-between"><span>Java</span><span class="text-mute dark:text-mute-dark">working</span></li>
+              <li class="flex items-center justify-between"><span>Python</span><span class="text-mute dark:text-mute-dark">working</span></li>
+            </ul>
+          </div>
+
+          <!-- Frontend -->
+          <div>
+            <div class="flex items-baseline justify-between border-b border-ink/20 dark:border-paper-dark/20 pb-3 mb-5">
+              <h3 class="label-mono">Frontend</h3>
+              <span class="label-mono text-coral">02</span>
+            </div>
+            <ul class="font-mono text-sm space-y-3">
+              <li class="flex items-center justify-between"><span>React</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>JavaScript</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>HTML5</span><span class="text-mute dark:text-mute-dark">strong</span></li>
+              <li class="flex items-center justify-between"><span>CSS3</span><span class="text-mute dark:text-mute-dark">strong</span></li>
+            </ul>
+          </div>
+
+          <!-- Infra & Cloud -->
+          <div>
+            <div class="flex items-baseline justify-between border-b border-ink/20 dark:border-paper-dark/20 pb-3 mb-5">
+              <h3 class="label-mono">Infra &amp; Cloud</h3>
+              <span class="label-mono text-coral">03</span>
+            </div>
+            <ul class="font-mono text-sm space-y-3">
+              <li class="flex items-center justify-between"><span>AWS</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>Docker</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>CI/CD</span><span class="text-mute dark:text-mute-dark">strong</span></li>
+              <li class="flex items-center justify-between"><span>PostgreSQL</span><span class="text-mute dark:text-mute-dark">strong</span></li>
+              <li class="flex items-center justify-between"><span>MySQL</span><span class="text-mute dark:text-mute-dark">strong</span></li>
+              <li class="flex items-center justify-between"><span>MongoDB</span><span class="text-mute dark:text-mute-dark">working</span></li>
+            </ul>
+          </div>
+
+          <!-- Testing & Tools -->
+          <div>
+            <div class="flex items-baseline justify-between border-b border-ink/20 dark:border-paper-dark/20 pb-3 mb-5">
+              <h3 class="label-mono">Testing &amp; Tools</h3>
+              <span class="label-mono text-coral">04</span>
+            </div>
+            <ul class="font-mono text-sm space-y-3">
+              <li class="flex items-center justify-between"><span>Jest</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>Git</span><span class="text-mute dark:text-mute-dark">primary</span></li>
+              <li class="flex items-center justify-between"><span>TDD</span><span class="text-mute dark:text-mute-dark">discipline</span></li>
+              <li class="flex items-center justify-between"><span>Git Flow</span><span class="text-mute dark:text-mute-dark">discipline</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Pull-quote -->
+        <div class="mt-24 md:mt-32 reveal">
+          <div class="hairline"></div>
+          <blockquote class="grid grid-cols-12 gap-6 md:gap-10 pt-12">
+            <div class="col-span-12 lg:col-span-2">
+              <span class="label-mono text-coral">Pull Quote</span>
+            </div>
+            <p class="col-span-12 lg:col-span-10 font-display text-3xl md:text-5xl leading-[1.1] tracking-serif-tight" style="max-width: 22ch;">
+              <span class="text-coral">&ldquo;</span>The right architecture isn&rsquo;t the cleverest one &mdash; it&rsquo;s the one a team can <span class="font-display-italic">live with</span> for five years.<span class="text-coral">&rdquo;</span>
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT — § 05
+    ============================================================ -->
+    <section id="contact" class="py-28 md:py-40 border-t border-ink/10 dark:border-paper-dark/15 scroll-mt-24">
+      <div class="container-edit">
+
+        <div class="mb-16 md:mb-20 reveal">
+          <div class="flex items-center justify-between mb-6">
+            <span class="section-num text-coral">§ 05 / Contact</span>
+            <span class="section-num text-mute dark:text-mute-dark">P. 06</span>
+          </div>
+          <h2 class="font-display section-headline">
+            Let&rsquo;s build <span class="font-display-italic">something.</span>
+          </h2>
+          <p class="kicker mt-6 text-mute dark:text-mute-dark">Open to senior backend / fullstack roles, contract or full-time.</p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-10 md:gap-14">
+
+          <!-- Left: contact info -->
+          <div class="col-span-12 lg:col-span-5 reveal">
+            <p class="text-lg leading-[1.7] text-ink/85 dark:text-paper-dark/85" style="max-width: 50ch;">
+              Tell me about your team, what you&rsquo;re building, what hurts. I read every message and respond within a couple of business days.
+            </p>
+
+            <dl class="mt-12 space-y-6">
+              <div>
+                <dt class="label-mono text-mute dark:text-mute-dark">Email</dt>
+                <dd class="mt-1.5"><a href="mailto:rafatahmedorik@gmail.com" class="font-display text-2xl md:text-3xl ulink">rafatahmedorik@gmail.com</a></dd>
+              </div>
+              <div>
+                <dt class="label-mono text-mute dark:text-mute-dark">Phone</dt>
+                <dd class="mt-1.5"><a href="tel:+8801911750945" class="font-display text-2xl md:text-3xl ulink">+880 (1911) 750-945</a></dd>
+              </div>
+              <div>
+                <dt class="label-mono text-mute dark:text-mute-dark">Location</dt>
+                <dd class="mt-1.5 font-display text-2xl md:text-3xl">Dhaka, Bangladesh</dd>
+              </div>
+            </dl>
+
+            <div class="mt-12 flex items-center gap-5">
+              <a href="https://github.com/rafat69ahmed" target="_blank" rel="noopener" aria-label="GitHub" class="w-11 h-11 inline-flex items-center justify-center border border-ink/20 dark:border-paper-dark/20 hover:border-coral hover:text-coral transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.6.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.5-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+              </a>
+              <a href="https://linkedin.com/in/rafat69ahmed/" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-11 h-11 inline-flex items-center justify-center border border-ink/20 dark:border-paper-dark/20 hover:border-coral hover:text-coral transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97v5.69H9.32V9h3.41v1.56h.05c.48-.9 1.64-1.87 3.37-1.87 3.6 0 4.27 2.37 4.27 5.45v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+              </a>
+              <a href="https://facebook.com/rafat.ahmed.146" target="_blank" rel="noopener" aria-label="Facebook" class="w-11 h-11 inline-flex items-center justify-center border border-ink/20 dark:border-paper-dark/20 hover:border-coral hover:text-coral transition-colors">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H8v-2.88h2.44V9.79c0-2.42 1.44-3.76 3.65-3.76 1.06 0 2.16.19 2.16.19v2.38h-1.22c-1.2 0-1.57.74-1.57 1.51v1.81h2.68l-.43 2.88h-2.25v7A10 10 0 0 0 22 12z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: form -->
+          <div class="col-span-12 lg:col-span-7 reveal">
+            <form id="contact-form" novalidate class="space-y-2">
+              <!-- name -->
+              <div>
+                <label for="cf-name" class="label-mono block mb-1 text-mute dark:text-mute-dark">Name <span class="text-coral" aria-hidden="true">*</span></label>
+                <input id="cf-name" name="name" type="text" required autocomplete="name" class="field-input" aria-required="true" aria-describedby="cf-name-err" />
+                <p id="cf-name-err" class="hidden mt-2 label-mono text-coral" role="alert">Please enter your name.</p>
+              </div>
+
+              <!-- email -->
+              <div class="pt-6">
+                <label for="cf-email" class="label-mono block mb-1 text-mute dark:text-mute-dark">Email <span class="text-coral" aria-hidden="true">*</span></label>
+                <input id="cf-email" name="email" type="email" required autocomplete="email" inputmode="email" class="field-input" aria-required="true" aria-describedby="cf-email-err" />
+                <p id="cf-email-err" class="hidden mt-2 label-mono text-coral" role="alert">Please enter a valid email address.</p>
+              </div>
+
+              <!-- subject -->
+              <div class="pt-6">
+                <label for="cf-subject" class="label-mono block mb-1 text-mute dark:text-mute-dark">Subject</label>
+                <input id="cf-subject" name="subject" type="text" class="field-input" />
+              </div>
+
+              <!-- message -->
+              <div class="pt-6">
+                <label for="cf-message" class="label-mono block mb-1 text-mute dark:text-mute-dark">Message <span class="text-coral" aria-hidden="true">*</span></label>
+                <textarea id="cf-message" name="message" rows="5" required class="field-input resize-y" aria-required="true" aria-describedby="cf-message-err"></textarea>
+                <p id="cf-message-err" class="hidden mt-2 label-mono text-coral" role="alert">Please write a short message (10+ characters).</p>
+              </div>
+
+              <!-- submit -->
+              <div class="pt-10 flex flex-wrap items-center gap-5">
+                <button type="submit" class="arrow-link inline-flex items-center gap-3 label-mono bg-ink text-paper dark:bg-paper-dark dark:text-ink-dark h-12 px-7 hover:bg-coral hover:text-paper transition-colors">
+                  <span id="cf-submit-text">Send Message</span>
+                  <span class="arrow">&rarr;</span>
+                </button>
+                <p class="label-mono text-mute dark:text-mute-dark">Replies within 1&ndash;2 business days.</p>
+              </div>
+
+              <!-- success -->
+              <div id="cf-success" class="hidden mt-8 p-5 border border-coral/40 bg-coral/5 text-ink dark:text-paper-dark" role="status" aria-live="polite">
+                <p class="font-display text-2xl text-coral">Thank you.</p>
+                <p class="mt-1 text-base">Your message is in. I&rsquo;ll be in touch shortly.</p>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="bg-ink text-paper dark:bg-ink-dark dark:text-paper-dark border-t border-paper/20 dark:border-paper-dark/15">
+
+    <!-- Big sign-off -->
+    <div class="container-edit pt-20 md:pt-28 pb-10 md:pb-16">
+      <div class="flex items-center justify-between mb-10">
+        <span class="section-num text-coral">§ Colophon</span>
+        <span class="section-num text-paper/55 dark:text-paper-dark/60">End / 2026</span>
+      </div>
+      <h2 class="font-display signoff">
+        Thanks for <span class="font-display-italic text-coral">visiting.</span>
+      </h2>
+    </div>
+
+    <!-- Hairline -->
+    <div class="container-edit"><div class="hairline" style="background: rgba(245, 242, 236, 0.2);"></div></div>
+
+    <!-- Bottom strip -->
+    <div class="container-edit py-10 md:py-12 grid grid-cols-12 gap-6">
+      <div class="col-span-12 md:col-span-4">
+        <p class="label-mono text-paper/60 dark:text-paper-dark/60">Editorial Folio &mdash; Option C</p>
+        <p class="mt-3 font-display text-2xl">Rafat Ahmed</p>
+      </div>
+      <nav class="col-span-12 md:col-span-4 flex flex-col gap-2" aria-label="Footer">
+        <a href="#about" class="label-mono ulink">01 About</a>
+        <a href="#experience" class="label-mono ulink">02 Work</a>
+        <a href="#projects" class="label-mono ulink">03 Shipping</a>
+        <a href="#skills" class="label-mono ulink">04 Stack</a>
+        <a href="#contact" class="label-mono ulink">05 Contact</a>
+      </nav>
+      <div class="col-span-12 md:col-span-4 flex flex-col gap-2 md:items-end">
+        <p class="label-mono"><a href="mailto:rafatahmedorik@gmail.com" class="ulink">rafatahmedorik@gmail.com</a></p>
+        <p class="label-mono"><a href="tel:+8801911750945" class="ulink">+880 (1911) 750-945</a></p>
+        <p class="label-mono text-paper/55 dark:text-paper-dark/60 mt-2">
+          &copy; <span id="footer-year">2026</span> Rafat Ahmed. Set in Instrument Serif, Inter Tight &amp; JetBrains Mono.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top -->
+  <button id="to-top" type="button" aria-label="Scroll to top" class="to-top fixed bottom-6 right-6 md:bottom-8 md:right-8 z-30 w-12 h-12 inline-flex items-center justify-center bg-coral text-paper rounded-full shadow-lg">
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <!-- ============================================================
+       SCRIPTS
+  ============================================================ -->
+  <script>
+    (function () {
+      // ---------- Theme toggle (with localStorage) ----------
+      const root = document.documentElement;
+      const themeKey = 'option-c-theme';
+      const stored = localStorage.getItem(themeKey);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (!stored && prefersDark)) root.classList.add('dark');
+
+      const toggleBtn = document.getElementById('theme-toggle');
+      toggleBtn?.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        localStorage.setItem(themeKey, root.classList.contains('dark') ? 'dark' : 'light');
+      });
+
+      // ---------- Mobile menu ----------
+      const menu = document.getElementById('mobile-menu');
+      const openBtn = document.getElementById('menu-open');
+      const closeBtn = document.getElementById('menu-close');
+      const setMenu = (open) => {
+        menu.classList.toggle('open', open);
+        openBtn?.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+      openBtn?.addEventListener('click', () => setMenu(true));
+      closeBtn?.addEventListener('click', () => setMenu(false));
+      document.querySelectorAll('.mobile-link').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+      // ---------- Reveal on scroll ----------
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reveals = document.querySelectorAll('.reveal');
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        reveals.forEach((el) => el.classList.add('visible'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach((el) => io.observe(el));
+      }
+
+      // ---------- Scroll-to-top ----------
+      const toTop = document.getElementById('to-top');
+      const onScroll = () => {
+        const show = window.scrollY > 400;
+        toTop.classList.toggle('visible', show);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+      // ---------- Footer year ----------
+      document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+      // ---------- Contact form validation ----------
+      const form = document.getElementById('contact-form');
+      const nameI = document.getElementById('cf-name');
+      const emailI = document.getElementById('cf-email');
+      const msgI = document.getElementById('cf-message');
+      const success = document.getElementById('cf-success');
+      const submitText = document.getElementById('cf-submit-text');
+
+      const showErr = (id, show) => {
+        document.getElementById(id).classList.toggle('hidden', !show);
+      };
+      const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+
+      nameI.addEventListener('blur', () => showErr('cf-name-err', !nameI.value.trim()));
+      emailI.addEventListener('blur', () => showErr('cf-email-err', !validEmail(emailI.value)));
+      msgI.addEventListener('blur', () => showErr('cf-message-err', msgI.value.trim().length < 10));
+
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const errors = {
+          name: !nameI.value.trim(),
+          email: !validEmail(emailI.value),
+          message: msgI.value.trim().length < 10
+        };
+        showErr('cf-name-err', errors.name);
+        showErr('cf-email-err', errors.email);
+        showErr('cf-message-err', errors.message);
+
+        const firstErrorField = errors.name ? nameI : errors.email ? emailI : errors.message ? msgI : null;
+        if (firstErrorField) {
+          firstErrorField.focus();
+          return;
+        }
+
+        submitText.textContent = 'Sending';
+        setTimeout(() => {
+          form.reset();
+          submitText.textContent = 'Send Message';
+          success.classList.remove('hidden');
+          success.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+          setTimeout(() => success.classList.add('hidden'), 6000);
+        }, 600);
+      });
+
+      // ---------- Header shadow on scroll ----------
+      const header = document.getElementById('site-header');
+      const headerScroll = () => {
+        if (window.scrollY > 8) {
+          header.classList.add('shadow-[0_1px_0_rgba(15,15,15,0.06)]');
+        } else {
+          header.classList.remove('shadow-[0_1px_0_rgba(15,15,15,0.06)]');
+        }
+      };
+      window.addEventListener('scroll', headerScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>
