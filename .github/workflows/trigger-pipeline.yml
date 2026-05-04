@@ -4,10 +4,9 @@ name: trigger-wayfinding-pipeline
 # main is the live portfolio site and stays out of the wayfinding loop.
 #
 # When a push hits dev, this workflow POSTs a `repository_dispatch` event
-# to rafat69ahmed/worthy-ai-wayfinding-pipeline (mirror of bestpass repo;
-# bestpass org Actions policy was blocking new workflow registrations,
-# so the trigger goes to the personal mirror until that's resolved).
-# That repo's .github/workflows/portal-pipeline.yml takes it from there.
+# to bestpass/worthy-ai-wayfinding-pipeline. That repo's
+# .github/workflows/portal-pipeline.yml takes it from there (real LLM
+# enrichment + UC volume upload to Databricks).
 
 on:
   push:
@@ -34,7 +33,7 @@ jobs:
             -H "Authorization: Bearer $PIPELINE_DISPATCH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/rafat69ahmed/worthy-ai-wayfinding-pipeline/dispatches \
+            https://api.github.com/repos/bestpass/worthy-ai-wayfinding-pipeline/dispatches \
             -d "$(cat <<JSON
           {
             "event_type": "portal-push",
@@ -54,8 +53,8 @@ jobs:
 
           # GitHub returns 204 on success; anything else is a real failure.
           if [ "$response" != "204" ]; then
-            echo "::error::dispatch failed (status $response). Check that PIPELINE_DISPATCH_TOKEN has 'repo' scope on rafat69ahmed/worthy-ai-wayfinding-pipeline." >&2
+            echo "::error::dispatch failed (status $response). Check that PIPELINE_DISPATCH_TOKEN has 'repo' scope on bestpass/worthy-ai-wayfinding-pipeline." >&2
             exit 1
           fi
 
-          echo "::notice::dispatched portal-push to rafat69ahmed/worthy-ai-wayfinding-pipeline (ref=${{ github.ref_name }}, sha=${{ github.sha }})"
+          echo "::notice::dispatched portal-push to bestpass/worthy-ai-wayfinding-pipeline (ref=${{ github.ref_name }}, sha=${{ github.sha }})"
